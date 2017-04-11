@@ -4,7 +4,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 // Import data access components
-var shift = require('./shiftmanager');
+var shift = require('./modules/shiftmanager');
 
 
 app.set('port', process.env.PORT);
