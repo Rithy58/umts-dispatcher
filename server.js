@@ -7,7 +7,7 @@ var io = require('socket.io')(http);
 var shift = require('./shiftmanager');
 
 
-app.set('port', 8080);
+app.set('port', process.env.PORT);
 
 app.use(express.static('./public'));
 
@@ -29,6 +29,8 @@ io.on('connection', function(socket){
   });
 });
 
-http.listen(app.get('port'), function() {
+var server = http.listen(app.get('port'), function() {
   console.log('Server is running on port', app.get('port'));
 });
+
+module.exports = server;
