@@ -6,5 +6,5 @@ npm install
 
 Then, start the server by running:
 ```
-node index.js
+npm start
 ```
