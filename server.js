@@ -8,9 +8,9 @@ var io = require('socket.io')(http);
 var shift = require('./modules/shiftmanager');
 
 
-app.set('port', process.env.PORT);
+app.set('port', process.env.PORT || 8080);
 
-app.use(express.static('./public'));
+app.use(express.static('./dist'));
 
 app.get('/home', function(req, res) {
   res.send("<p>Hello World</p>");
