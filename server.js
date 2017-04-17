@@ -1,3 +1,4 @@
+var dotEnv = require('dotenv').config();
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
@@ -17,6 +18,15 @@ app.get('/home', function(req, res) {
 
 io.on('connection', function(socket){
   console.log('a user connected');
+
+  // Handle promises on function call, not in function itself.
+  var a = shift.getShiftByDay();
+  a.then((res) => {
+    console.log(res);
+  })
+  .catch((err) => {
+    console.error('error running query', err);
+  });
 
   // User Disconnected
   socket.on('disconnect', function(){

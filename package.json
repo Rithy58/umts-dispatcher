@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Rithy58/umts-dispatcher#readme",
   "dependencies": {
+    "pg": "^6.1.5",
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
     "@angular/core": "^4.0.0",
