@@ -19,15 +19,6 @@ app.get('/home', function(req, res) {
 io.on('connection', function(socket){
   console.log('a user connected');
 
-  // Handle promises on function call, not in function itself.
-  var a = shift.getShiftByDay();
-  a.then((res) => {
-    console.log(res);
-  })
-  .catch((err) => {
-    console.error('error running query', err);
-  });
-
   // User Disconnected
   socket.on('disconnect', function(){
     console.log('user disconnected');
