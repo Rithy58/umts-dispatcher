@@ -6,7 +6,7 @@ module.exports = {
   },
 
   getAllBuses: function(){
-    return db.query("SELECT * From bus").rows;
+    return db.query("SELECT * From bus");
   },
 
   getDefects: function(busID){
