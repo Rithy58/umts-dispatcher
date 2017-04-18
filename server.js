@@ -13,32 +13,8 @@ app.set('port', process.env.PORT || 8080);
 
 app.use(express.static('./dist'));
 
-app.get('/home', function(req, res) {
-  res.send("<p>Hello World</p>");
-
-  var busses = bus.addBus('umts47','2017 Double');
-
-  busses.then((res) => {
-    console.log(res.rows);
-  })
-  .catch((err) =>{
-    console.error('error running query', err);
-  });
-
-});
-
 io.on('connection', function(socket){
   console.log('a user connected');
-
-  // Handle promises on function call, not in function itself.
-  var a = shift.getShiftByDay();
-  a.then((res) => {
-    console.log(res);
-  })
-  .catch((err) => {
-    console.error('error running query', err);
-  });
-
 
   // User Disconnected
   socket.on('disconnect', function(){
