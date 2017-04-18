@@ -1,6 +1,9 @@
 var db = require('./db');
 
 module.exports = {
+  setDB: function(newDb) {
+    db = newDb;
+  },
 
   getAllBuses: function(){
     return db.query("SELECT * From bus").rows;
