@@ -1,6 +1,9 @@
 var db = require('./db');
 
 module.exports = {
+  setDB: function(newDb) {
+    db = require(newDb);
+  },
 
   // Returns an promise for querying the database for
   // shifts occuring on a given day.
