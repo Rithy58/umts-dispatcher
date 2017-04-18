@@ -14,15 +14,15 @@ module.exports = {
   },
 
   addBus: function(busID, Type){
-    return db.query("INSERT INTO bus (id,type,defects) VALUES ($1,$2,'none')",[busID,Type]);
+    return db.query("INSERT INTO bus (id,type,defects) VALUES ($1,$2,'none') RETURNING *",[busID,Type]);
   },
 
   editDefects: function(busID, Defect){
-    return db.query("UPDATE bus SET defects=$2 WHERE id=$1",[busID,Defect]);
+    return db.query("UPDATE bus SET defects=$2 WHERE id=$1 RETURNING *",[busID,Defect]);
   },
 
   removeBus: function(busID){
-    return db.query("DELETE FROM bus WHERE id=$1",[busID]);
+    return db.query("DELETE FROM bus WHERE id=$1 RETURNING true AS success",[busID]);
   },
 
   getBusByID: function(busID){
