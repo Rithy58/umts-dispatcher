@@ -6,8 +6,8 @@ module.exports = {
     return db.query("SELECT * From bus").rows;
   },
 
-  getDefects: function(){
-    return db.query("SELECT defects FROM bus.");
+  getDefects: function(busID){
+    return db.query("SELECT defects FROM bus WHERE id=$1",[busID]);
   },
 
   addBus: function(busID, Type){
