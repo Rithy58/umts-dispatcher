@@ -26,13 +26,19 @@ module.exports = {
     return false;
   },
   setDriver: function(shiftID, driverID) {
-    return false;
+    query = "UPDATE shift SET driver_id = $2 WHERE id = $1 RETURNING *";
+    args = [shiftID, driverID];
+    return db.query(query, args);
   },
   setBus: function(shiftID, busID) {
-    return false;
+    query = "UPDATE shift SET bus_id = $2 WHERE id = $1 RETURNING *";
+    args = [shiftID, busID];
+    return db.query(query, args);
   },
   setRoute: function(shiftID, route) {
-    return false;
+    query = "UPDATE shift SET route = $2 WHERE id = $1 RETURNING *";
+    args = [shiftID, route]
+    return db.query(query, args);
   },
   addIncident: function(shiftID, incidentStr) {
     return false;
