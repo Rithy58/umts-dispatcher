@@ -6,6 +6,7 @@ var io = require('socket.io')(http);
 
 // Import data access components
 var shift = require('./modules/shiftmanager');
+var bus = require('./modules/busManager');
 
 
 app.set('port', process.env.PORT || 8080);
@@ -14,6 +15,16 @@ app.use(express.static('./dist'));
 
 app.get('/home', function(req, res) {
   res.send("<p>Hello World</p>");
+
+  var busses = bus.addBus('umts47','2017 Double');
+
+  busses.then((res) => {
+    console.log(res.rows);
+  })
+  .catch((err) =>{
+    console.error('error running query', err);
+  });
+
 });
 
 io.on('connection', function(socket){
