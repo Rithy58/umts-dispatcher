@@ -104,13 +104,14 @@ describe('drivers', function(){
 		});
 
 		it('Should remove Karl Marx', function() {
-			return driver.removeDriver(2)
-			.then(function(res) {
-				assert(res.rowCount == 3, 'Result should contain 3 drivers');
-			})
-		});
+			driver.removeDriver(2).then(
+				db.query("SELECT * FROM driver")
+				.then(function(res) {
+					assert.equal(res.rowCount, 3, 'Result should contain 3 drivers');
+				})
+			)}
+		);
 	});
-	
 });
 
 
