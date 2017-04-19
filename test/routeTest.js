@@ -27,27 +27,26 @@ describe('routeManager', function(){
 		});
 	});
 
-});
-/*
+
 	describe('#addRoute()', function() {
 		before(function() {
 			return db.query("DELETE FROM route;");
 		});
 		// Uses an assert.deepEqual to check JSON equality
 		it('should add the correct route number', function() {
-			return route.addRoute(37, ['short'])
+			return route.addRoute(37, 'short')
 			.then(function(res) {
 				assert.deepEqual({
-					id: 37,
-					type: ['short'],
+					number: 37,
+					valid_bus_types: 'short',
 				}, res.rows[0]);
 			});
 		});
 	});
 
+});
 
-
-
+/*
 	describe('#getValidBusTypes()', function() {
 		// Insert 1 row in the database
 		before(function() {
