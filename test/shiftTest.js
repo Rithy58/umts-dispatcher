@@ -24,8 +24,8 @@ describe('shiftManager', function(){
 		before(function() {
       db.query("ALTER SEQUENCE {tablename}_id_seq RESTART;")
 			db.query("DELETE FROM shift;");
-			var queryStr = "INSERT INTO shift (start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES ";
-			queryStr += "('2012-02-18 14:28:32','2012-02-18 14:28:33', 'Campus Center', 'CS Building', '12', '123', '1');";
+			var queryStr = "INSERT INTO shift (id, start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES ";
+			queryStr += "('1', '2012-02-18 14:28:32','2012-02-18 14:28:33', 'Campus Center', 'CS Building', '12', '123', '1');";
 			return db.query(queryStr);
 		});
 
@@ -42,8 +42,8 @@ describe('shiftManager', function(){
 		before(function() {
       db.query("ALTER SEQUENCE {tablename}_id_seq RESTART;")
 			db.query("DELETE FROM shift;");
-			var queryStr = "INSERT INTO shift (start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES ";
-			queryStr += "('2012-02-18 14:28:32','2012-02-18 14:28:33', 'Campus Center', 'CS Building', '12', '123', '1');";
+			var queryStr = "INSERT INTO shift (id, start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES ";
+			queryStr += "('1', '2012-02-18 14:28:32','2012-02-18 14:28:33', 'Campus Center', 'CS Building', '12', '123', '1');";
 			return db.query(queryStr);
 		});
 
@@ -60,8 +60,8 @@ describe('shiftManager', function(){
     before(function() {
       db.query("ALTER SEQUENCE {tablename}_id_seq RESTART;")
       db.query("DELETE FROM shift;");
-      var queryStr = "INSERT INTO shift (start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES ";
-      queryStr += "('2012-02-18 14:28:32','2012-02-18 14:28:33', 'Campus Center', 'CS Building', '12', '123', '1');";
+      var queryStr = "INSERT INTO shift (id, start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES ";
+      queryStr += "('1', '2012-02-18 14:28:32','2012-02-18 14:28:33', 'Campus Center', 'CS Building', '12', '123', '1');";
       return db.query(queryStr);
     });
 
