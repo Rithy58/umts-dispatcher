@@ -28,7 +28,9 @@ describe('shiftManager', function(){
       end_location, driver_id, bus_id, route) VALUES \
       (make_timestamptz(2017, 4, 17, 8, 0, 0), make_timestamptz(2017, 4, 17, 12, 0, 0), \
       'start location 1', 'end location 1', 1,'bus1', 30);";
-    return db.query(insertShift);
+    db.query(insertShift);
+
+    var insertIncidents = "INSERT INTO incidents (name, phone, late_count) VALUES ('andrew', '1234567890', 0);"
   });
 
   describe('#getShiftByDay()', function() {
@@ -153,7 +155,7 @@ describe('shiftManager', function(){
     describe('#getShift()', function() {
     // insert entry into database
     before(function() {
-      db.query("ALTER SEQUENCE shift_id_seq RESTART;")
+      db.query("ALTER SEQUENCE shift_id_seq RESTART;");
       db.query("DELETE FROM shift;");
       var queryStr = "INSERT INTO shift (id, start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES ";
       queryStr += "('1', '2012-02-18 14:28:32','2012-02-18 14:28:33', 'Campus Center', 'CS Building', '12', '123', '1');";
@@ -166,6 +168,36 @@ describe('shiftManager', function(){
         assert.equal('1', res.rows[0].id);
       });
     });
+  });
+
+  describe ('#addIncident()',function(){
+    before(function(){
+        db.query("ALTER SEQUENCE incidents_id_seq RESTART;");
+        db.query("DELETE FROM incidents;");
+        var queryStr = "INSERT INTO incidents (shift_id,description) VALUES (10, 'Bus crash')";
+        return db.query(queryStr);
+    });
+
+    it('should add new incidents', function() {
+      console.log('Line 183\n')
+      return shift.addIncident(11,'Bus Crash')
+      .then(function(res) {
+        assert.equal(true, res.rows[0].success);
+        return shift.getIncident(11)
+        .then(function(res){
+          assert.deepEqual({
+          id: 2,
+          shift_id: 11,
+          description: 'Bus Crash'
+          }, res.rows[0]);
+        });
+      });
+    });
+    after(function(){
+      db.query("DELETE FROM incidents;");
+    })
+
+
   });
 
     /**describe('#addShift()', function() {

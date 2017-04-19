@@ -49,8 +49,12 @@ module.exports = {
     return db.query(query, args);
   },
   addIncident: function(shiftID, incidentStr) {
-    query = "INSERT INTO incidents (shift_id,description) VALUES ($1,$2)";
+    query = "INSERT INTO incidents (shift_id,description) VALUES ($1,$2) RETURNING true AS success";
     return db.query(query,[shiftID,incidentStr]);
+  },
+  getIncident: function(shiftID){
+    query = "SELECT * FROM incidents WHERE shift_id = $1";
+    return db.query(query,[shiftID]);
   },
   deleteIncident: function(incidentID) {
     query = "DELETE FROM incidents WHERE id=$1 RETURNING true AS success";
