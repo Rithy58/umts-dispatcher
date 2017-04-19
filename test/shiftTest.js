@@ -200,24 +200,45 @@ describe('shiftManager', function(){
 
   });
 
-    /**describe('#addShift()', function() {
+  describe('#addShift()', function() {
     // insert entry into database
     before(function() {
       db.query("ALTER SEQUENCE shift_id_seq RESTART;")
       db.query("DELETE FROM shift;");
-      var queryStr = "INSERT INTO shift (id, start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES ";
+      /**var queryStr = "INSERT INTO shift (id, start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES ";
       queryStr += "('1', '2012-02-18 14:28:32','2012-02-18 14:28:33', 'Campus Center', 'CS Building', '12', '123', '1');";
-      return db.query(queryStr);
+      var args = [start, end ]
+      return db.query(queryStr);*/
     });
 
     it('should add the shift', function() {
-      return shift.addShift('2', '2012-02-18 14:28:32','2012-02-18 14:28:33', 'Campus Center', 'CS Building', '12', '123', '1')
-      .then(function(res) {
-        assert.equal('2', '2012-02-18 14:28:32','2012-02-18 14:28:33', 'Campus Center', 'CS Building', '12', '123', '1', res.rows[0]);
+      start = new Date(2017, 3, 1, 8, 0, 0, 0);
+      end = new Date(2017, 3, 1, 10, 0, 0, 0);
+      return shift.addShift(start, end, 'Campus Center', 'CS Building', '12', '123', '1')
+        .then(function(res) {
+          var actual = res.rows[0];
+          assert.deepEqual({
+            id: 1, 
+            start_time: '2017-04-01T08:00:00.000Z',
+            end_time: '2017-04-01T10:00:00.000Z', 
+            start_location: 'Campus Center', 
+            end_location: 'CS Building', 
+            driver_id: 12, 
+            bus_id: '123', 
+            route: 1}, 
+            {
+              id: actual.id,
+              start_time: actual.start_time.toISOString(),
+              end_time: actual.end_time.toISOString(),
+              start_location: actual.start_location, 
+              end_location: actual.end_location, 
+              driver_id: actual.driver_id, 
+              bus_id: actual.bus_id, 
+              route: actual.route
+            });
+        });
       });
     });
-  });*/
-
   /**describe('#driverAvailable()', function() {
     // insert entry into database
     before(function() {

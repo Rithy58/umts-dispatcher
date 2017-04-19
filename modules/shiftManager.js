@@ -65,8 +65,24 @@ module.exports = {
     return db.query(query,[incidentStr,incidentID]);
   },
   addShift: function(startTime, endTime, startLoc, endLoc, driverID, busID, route) {
-    query = "ADD shift WHERE startTime=$1, endTime=$2, startLoc=$3, endLoc=$4, driverID=$5, busID=$6, route=$7"
-    args = [startTime, endTime, startLoc, endLoc, driverID, busID, route];
+    query = "INSERT INTO shift (start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES (make_timestamptz($1,$2,$3,$4,$5,0),make_timestamptz($6,$7,$8,$9,$10,0),$11,$12,$13,$14,$15) RETURNING *";
+    var args = [startTime.getFullYear(), 
+    startTime.getMonth() + 1, 
+    startTime.getDate(), 
+    startTime.getHours(), 
+    startTime.getMinutes(), 
+    
+    endTime.getFullYear(), 
+    endTime.getMonth() + 1, 
+    endTime.getDate(), 
+    endTime.getHours(), 
+    endTime.getMinutes(), 
+    
+    startLoc, 
+    endLoc, 
+    driverID, 
+    busID, 
+    route];
     return db.query(query, args);
   },
   driverAvailable: function(driverID, time) {
