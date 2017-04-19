@@ -5,8 +5,9 @@ module.exports = {
     db = require(newDb);
   },
 
-  addRoute: function(routeID){
-    QUERY = "INSERT INTO route "
+  addRoute: function(routeID, valid_bus_types){
+    //QUERY = "INSERT INTO route "
+    return db.query("INSERT INTO route VALUES ($1, $2) RETURNING *", [routeID, valid_bus_types]);
   },
 
   getRouteNumber: function(routeID){
@@ -31,8 +32,10 @@ module.exports = {
 
   editRouteNumber: function(routeID, new_number){
     return db.query("UPDATE route SET number = new_number WHERE id=$1", [routeID]);
-  }.
+  }
 
+}
+/*
   editValidBusTypes: function(routeID, new_bus_types){
     return db.query("UPDATE route SET valid_bus_types = new_bus_types WHERE id=$1", [routeID]);
   },
@@ -58,3 +61,4 @@ module.exports = {
 
 
 }
+*/
