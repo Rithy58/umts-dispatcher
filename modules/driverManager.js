@@ -23,9 +23,9 @@ module.exports = {
   },
 
   updateDriver: function(driverID, name, phone, late_count){
-    QUERY = "UPDATE driver SET name='$2', phone='$3', late_count=$4 WHERE id=$1 RETURNING *";
-    ARGS = [driverID, name, phone, late_count];
-    return db.query(QUERY,ARGS);
+    QUERY = "UPDATE driver SET name='" + name + "', phone='" + phone + "', late_count=" + late_count + " WHERE id=" + driverID + " RETURNING *";
+    // ARGS = [driverID, name, phone, late_count];
+    return db.query(QUERY);
   },
 
   getDriverByID: function(driverID){
