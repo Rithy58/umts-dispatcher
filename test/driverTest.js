@@ -10,36 +10,36 @@ driver.setDB('./testDB');
 
 describe('drivers', function(){
 
-	describe('#getAllDrivers()', function() {
-		//Insert 4 entries into the database
-		before(function() {
-			db.query("ALTER SEQUENCE driver_id_seq RESTART;");
+	// Remove everytihng from the drivers table after each test
+	afterEach(function() {
 			db.query("DELETE FROM driver;");
-			var queryStr = "INSERT INTO driver (id, name, phone, late_count) VALUES ";
-			queryStr += "('3213', 'Jane Smith','473-834-3847', 1), ('3735', 'Karl Marx','573-583-7586', 0), ('2749', 'Not Hitler','999-999-9999', 3), ('43', 'Not Jesus','4', 0);";
-			return db.query(queryStr);
-		});
+	});
 
+	describe('#getAllDrivers()', function() {
+		// Before the test, add 4 drivers
+		before(function() {
+				db.query("ALTER SEQUENCE driver_id_seq RESTART;");
+				db.query("DELETE FROM driver;");
+				var queryStr = "INSERT INTO driver (id, name, phone, late_count) VALUES ";
+				queryStr += "('3213', 'Jane Smith','473-834-3847', 1), ('3735', 'Karl Marx','573-583-7586', 0), ('2749', 'Not Hitler','999-999-9999', 3), ('43', 'Not Jesus','4', 0);";
+				return db.query(queryStr);
+		});
 		it('should gets all drivers', function() {
 			return driver.getAllDrivers()
 			.then(function(res) {
 				assert(res.rowCount == 4, 'Result should contain 4 drivers.');
 			});
 		});
-
-		after(function() {
-			db.query("DELETE FROM driver;");
-		});
-
 	});
 
 	describe('#getDriverByID()', function() {
 		//Insert 42entries into the database, retrieve 1
 		before(function() {
+			db.query("ALTER SEQUENCE driver_id_seq RESTART;");
 			db.query("DELETE FROM driver;");
 			var queryStr = "INSERT INTO driver (id, name, phone, late_count) VALUES ";
 			queryStr += "('2749', 'Not Hitler','999-999-9999', 3), ('43', 'Not Jesus','4', 0);";
-
+		}
         	it('should return a driver by id', function() {
 			return driver.getDriverByID('2749')
 			.then(function(res) {
@@ -56,6 +56,7 @@ describe('drivers', function(){
 
 	describe('#addDriver()', function() {
 		before(function() {
+			db.query("ALTER SEQUENCE driver_id_seq RESTART;");
 			return db.query("DELETE FROM driver;");
 		});
 		// Uses an assert.deepEqual to check JSON equality
@@ -71,10 +72,6 @@ describe('drivers', function(){
 			});
 		});
 	});
-
-
-
-
 
 	describe('#updateDriver()', function() {
 		//Insert 4 entries into the database
@@ -95,10 +92,5 @@ describe('drivers', function(){
 				assert(queriedDriver.late_count == 6, 'late_count was not changed successfully.');
 			});
 		});
-
-		after(function() {
-			db.query("DELETE FROM driver;");
-		});
-		
 	});
 });
