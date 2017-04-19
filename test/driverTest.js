@@ -6,24 +6,56 @@ var assert = require('assert');
 // Point the driverManager DB reference to modules/testDB
 // Note that the scope of the path is driverManager, NOT
 // this file.
-bus.setDB('./testDB');
+driver.setDB('./testDB');
 
 describe('drivers', function(){
 
 	describe('#getAllDrivers()', function() {
 		//Insert 4 entries into the database
 		before(function() {
-			db.query("DELETE FROM drivers;");
-			var queryStr = "INSERT INTO drivers (id, driverName, PhoneNumber, latCount) VALUES ";
+			db.query("ALTER SEQUENCE driver_id_seq RESTART;");
+			db.query("DELETE FROM driver;");
+			var queryStr = "INSERT INTO driver (id, name, phone, late_count) VALUES ";
 			queryStr += "('3213', 'Jane Smith','473-834-3847', 1), ('3735', 'Karl Marx','573-583-7586', 0), ('2749', 'Not Hitler','999-999-9999', 3), ('43', 'Not Jesus','4', 0);";
 			return db.query(queryStr);
 		});
 
 		it('should gets all drivers', function() {
-			return bus.getAllDrivers()
+			return driver.getAllDrivers()
 			.then(function(res) {
 				assert(res.rowCount == 4, 'Result should contain 4 drivers.');
 			});
 		});
+
+		after(function() {
+			db.query("DELETE FROM driver;");
+		});
+
+	});
+
+	describe('#updateDriver()', function() {
+		//Insert 4 entries into the database
+		before(function() {
+			db.query("ALTER SEQUENCE driver_id_seq RESTART;");
+			db.query("DELETE FROM driver;");
+			var queryStr = "INSERT INTO driver (id, name, phone, late_count) VALUES ";
+			queryStr += "('3213', 'Jane Smith','473-834-3847', 1), ('3735', 'Karl Marx','573-583-7586', 0), ('2749', 'Not Hitler','999-999-9999', 3), ('43', 'Not Jesus','4', 0);";
+			return db.query(queryStr);
+		});
+
+		it('should update the driver Karl Marx to have a new name, number and late count', function() {
+			return driver.updateDriver(3735, "Joseph Stalin", "685-738-5375", 6)
+			.then(function(res) {
+				queriedDriver = db.query("SELECT FROM driver WHERE id=3735").rows;
+				assert(queriedDriver.name == "Joseph Stalin", 'Name was not changed successfully.');
+				assert(queriedDriver.phone == "685-738-5375", 'Phone was not changed successfully.');
+				assert(queriedDriver.late_count == 6, 'late_count was not changed successfully.');
+			});
+		});
+
+		after(function() {
+			db.query("DELETE FROM driver;");
+		});
+		
 	});
 });
