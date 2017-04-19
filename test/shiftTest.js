@@ -9,14 +9,50 @@ var assert = require('assert');
 shift.setDB('./testDB');
 
 describe('shiftManager', function(){
+  // Gross chain of SQL inserts... If we can clean this up, we should.
+  before(function() {
+    db.query("ALTER SEQUENCE driver_id_seq RESTART;");
+    db.query("ALTER SEQUENCE shift_id_seq RESTART;");
+    db.query("DELETE FROM shift;")
+    db.query("DELETE FROM driver;")
+    db.query("DELETE FROM bus;");
+    db.query("DELETE FROM route;");
+    var insertRoute = "INSERT INTO route (number, valid_bus_types) VALUES (30, ARRAY['a', 'b']);";
+    db.query(insertRoute);
+    var insertBus = "INSERT INTO bus (id, type, defects) VALUES ('bus1', 'type1', 'none');";
+    db.query(insertBus);
+    var insertDriver = "INSERT INTO driver (name, phone, late_count) VALUES ('andrew', '1234567890', 0);";
+    db.query(insertDriver);
 
-  // Reset the id generator back to 1
-  beforeEach(function() {
-    return db.query("ALTER SEQUENCE shift_id_seq RESTART;");
-  })
+    var insertShift = "INSERT INTO shift (start_time, end_time, start_location, \
+      end_location, driver_id, bus_id, route) VALUES \
+      (make_timestamptz(2017, 4, 17, 8, 0, 0), make_timestamptz(2017, 4, 17, 12, 0, 0), \
+      'start location 1', 'end location 1', 1,'bus1', 30);";
+    return db.query(insertShift);
+  });
 
-  after(function(){
-    return db.query("DELETE FROM bus;");
+  describe('#setStartTime()', function() {
+		it('should change the date of a shift', function() {
+      time = new Date(2017,3,1,8,0,0,0);
+      return shift.setStartTime(1, time)
+      .then(function(res) {
+        var res_start_time = res.rows[0].start_time;
+        assert.equal('2017-04-01T08:00:00.000Z',res_start_time.toISOString());
+      });
+		});
+	});
+
+  after(function() {
+    return db.query("DELETE FROM shift;")
+    .then(function() {
+      return db.query("DELETE FROM driver;")
+      .then(function() {
+        return db.query("DELETE FROM bus;")
+        .then(function() {
+          return db.query("DELETE FROM route")
+        })
+      })
+    })
   });
 
   describe('#setDriver()', function() {

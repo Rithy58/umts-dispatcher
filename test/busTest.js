@@ -107,4 +107,8 @@ describe('busManager', function(){
 			})
 		});
 	});
+
+	after(function() {
+		return db.query("DELETE FROM bus");
+	});
 });

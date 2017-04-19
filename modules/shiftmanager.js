@@ -19,11 +19,11 @@ module.exports = {
   getShift: function(shiftID) {
     return false;
   },
-  setDate: function(shiftID, date) {
-    return false;
-  },
   setStartTime: function(shiftID, time) {
-    return false;
+    query = "UPDATE shift SET start_time=make_timestamptz($2,$3,$4,$5,$6,0) WHERE id=$1 RETURNING *;";
+    args = [shiftID, time.getFullYear(), time.getMonth() + 1,
+       time.getDate(), time.getHours(), time.getMinutes()];
+    return db.query(query, args);
   },
   setEndTime: function(shiftID, time) {
     return false;
