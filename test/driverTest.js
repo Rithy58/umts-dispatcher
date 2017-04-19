@@ -41,14 +41,14 @@ describe('drivers', function(){
 			queryStr += "('2749', 'Not Hitler','999-999-9999', 3), ('43', 'Not Jesus','4', 0);";
 		});
 		it('should return a driver by id', function() {
-		return driver.getDriverByID('2749')
-		.then(function(res) {
-			assert.deepEqual({
-				id: '2749',
-				name: 'Not Hitler',
-				PhoneNumber: '999-999-9999',
-				lateCount:'3'
-			}, res.rows[0]);
+			return driver.getDriverByID('2749')
+			.then(function(res) {
+				assert.deepEqual({
+					id: '2749',
+					name: 'Not Hitler',
+					PhoneNumber: '999-999-9999',
+					lateCount:'3'
+				}, res.rows[0]);
 			})
 		});
 	});
@@ -84,11 +84,15 @@ describe('drivers', function(){
 		it('should update the driver Karl Marx to have a new name, number and late count', function() {
 			return driver.updateDriver(2, "Joseph Stalin", "685-738-5375", 6)
 			.then(function(res) {
-				// queriedDriver = db.query("SELECT FROM driver WHERE id=3735").rows;
-				// assert(queriedDriver.name == "Joseph Stalin", 'Name was not changed successfully.');
-				// assert(queriedDriver.phone == "685-738-5375", 'Phone was not changed successfully.');
-				// assert(queriedDriver.late_count == 6, 'late_count was not changed successfully.');
-			});
+				assert.deepEqual({
+					id: 2,
+					name: 'Joseph Stalin',
+					phone: '685-738-5375',
+					late_count: 6
+				}, res.rows[0]);
+			})
 		});
 	});
+
+	
 });
