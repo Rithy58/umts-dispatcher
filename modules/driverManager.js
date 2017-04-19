@@ -11,9 +11,8 @@ module.exports = {
   },
 
   addDriver: function(name, phone, late_count){
-    QUERY = "INSERT INTO driver (name, phone, late_count) VALUES ($1,$2,$3) RETURNING *";
-    ARGS = [name, phone, late_count];
-    return db.query(QUERY, ARGS);
+    QUERY = "INSERT INTO driver (name, phone, late_count) VALUES ('" + name + "', '" + phone + "', " + late_count + ") RETURNING *";
+    return db.query(QUERY);
   },
 
   removeDriver: function(driverID){

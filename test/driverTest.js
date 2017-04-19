@@ -60,13 +60,13 @@ describe('drivers', function(){
 		});
 		// Uses an assert.deepEqual to check JSON equality
 		it('should add the driver', function() {
-			return driver.addDriver('3735', 'Karl Marx','573-583-7586', '0')
+			return driver.addDriver('Karl Marx','573-583-7586', '0')
 			.then(function(res) {
 				assert.deepEqual({
-					id: '3735',
+					id: '1',
 					name: 'Karl Marx',
-					PhoneNumber: '573-583-7586',
-					lateCount:'0'
+					phone: '573-583-7586',
+					late_count:'0'
 				}, res.rows[0]);
 			});
 		});
