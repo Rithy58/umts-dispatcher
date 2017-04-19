@@ -38,13 +38,13 @@ describe('drivers', function(){
 			db.query("ALTER SEQUENCE driver_id_seq RESTART;");
 			db.query("DELETE FROM driver;");
 			var queryStr = "INSERT INTO driver (name, phone, late_count) VALUES ('Not Hitler','999-999-9999', 3), ('Not Jesus','4', 0);";
-			db.query(queryStr);
+			return db.query(queryStr);
 		});
 		it('should return a driver by id', function() {
-			return driver.getDriverByID('1')
+			return driver.getDriverByID(1)
 			.then(function(res) {
 				assert.deepEqual(res.rows[0], {
-					id: '1',
+					id: 1,
 					name: 'Not Hitler',
 					phone: '999-999-9999',
 					late_count:'3'
@@ -106,7 +106,7 @@ describe('drivers', function(){
 		it('Should remove Karl Marx', function() {
 			return driver.removeDriver(2)
 			.then(function(res) {
-				assert(res.rowCount == 1, 'Result should contain 3 drivers');
+				assert(res.rowCount == 3, 'Result should contain 3 drivers');
 			})
 		});
 	});
