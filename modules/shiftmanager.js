@@ -26,7 +26,10 @@ module.exports = {
     return db.query(query, args);
   },
   setEndTime: function(shiftID, time) {
-    return false;
+    query = "UPDATE shift SET end_time=make_timestamptz($2,$3,$4,$5,$6,0) WHERE id=$1 RETURNING *;";
+    args = [shiftID, time.getFullYear(), time.getMonth() + 1,
+       time.getDate(), time.getHours(), time.getMinutes()];
+    return db.query(query, args);
   },
   setDriver: function(shiftID, driverID) {
     query = "UPDATE shift SET driver_id = $2 WHERE id = $1 RETURNING *";

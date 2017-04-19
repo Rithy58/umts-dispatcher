@@ -32,7 +32,7 @@ describe('shiftManager', function(){
   });
 
   describe('#setStartTime()', function() {
-		it('should change the date of a shift', function() {
+		it('should change the start time of a shift', function() {
       time = new Date(2017,3,1,8,0,0,0);
       return shift.setStartTime(1, time)
       .then(function(res) {
@@ -42,23 +42,21 @@ describe('shiftManager', function(){
 		});
 	});
 
-  after(function() {
-    return db.query("DELETE FROM shift;")
-    .then(function() {
-      return db.query("DELETE FROM driver;")
-      .then(function() {
-        return db.query("DELETE FROM bus;")
-        .then(function() {
-          return db.query("DELETE FROM route")
-        })
-      })
-    })
-  });
+  describe('#setEndTime()', function() {
+		it('should change the end time of a shift', function() {
+      time = new Date(2017,3,1,8,0,0,0);
+      return shift.setEndTime(1, time)
+      .then(function(res) {
+        var res_end_time = res.rows[0].end_time;
+        assert.equal('2017-04-01T08:00:00.000Z',res_end_time.toISOString());
+      });
+		});
+	});
 
   describe('#setDriver()', function() {
 		//Insert entry into the database
 		before(function() {
-      db.query("ALTER SEQUENCE {tablename}_id_seq RESTART;")
+      db.query("ALTER SEQUENCE shift_id_seq RESTART;")
 			db.query("DELETE FROM shift;");
 			var queryStr = "INSERT INTO shift (id, start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES ";
 			queryStr += "('1', '2012-02-18 14:28:32','2012-02-18 14:28:33', 'Campus Center', 'CS Building', '12', '123', '1');";
@@ -76,7 +74,7 @@ describe('shiftManager', function(){
   describe('#setBus()', function() {
     // insert entry into database
 		before(function() {
-      db.query("ALTER SEQUENCE {tablename}_id_seq RESTART;")
+      db.query("ALTER SEQUENCE shift_id_seq RESTART;")
 			db.query("DELETE FROM shift;");
 			var queryStr = "INSERT INTO shift (id, start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES ";
 			queryStr += "('1', '2012-02-18 14:28:32','2012-02-18 14:28:33', 'Campus Center', 'CS Building', '12', '123', '1');";
@@ -94,7 +92,7 @@ describe('shiftManager', function(){
   describe('#setRoute()', function() {
     // insert entry into database
     before(function() {
-      db.query("ALTER SEQUENCE {tablename}_id_seq RESTART;")
+      db.query("ALTER SEQUENCE shift_id_seq RESTART;")
       db.query("DELETE FROM shift;");
       var queryStr = "INSERT INTO shift (id, start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES ";
       queryStr += "('1', '2012-02-18 14:28:32','2012-02-18 14:28:33', 'Campus Center', 'CS Building', '12', '123', '1');";
@@ -107,5 +105,18 @@ describe('shiftManager', function(){
         assert.equal('95', res.rows[0].route);
       });
     });
+  });
+
+  after(function() {
+    return db.query("DELETE FROM shift;")
+    .then(function() {
+      return db.query("DELETE FROM driver;")
+      .then(function() {
+        return db.query("DELETE FROM bus;")
+        .then(function() {
+          return db.query("DELETE FROM route")
+        })
+      })
+    })
   });
 });
