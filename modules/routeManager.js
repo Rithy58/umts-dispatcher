@@ -6,7 +6,6 @@ module.exports = {
   },
 
   addRoute: function(routeID, valid_bus_types){
-    //QUERY = "INSERT INTO route "
     return db.query("INSERT INTO route VALUES ($1, $2) RETURNING *", [routeID, valid_bus_types]);
   },
 
@@ -53,7 +52,7 @@ module.exports = {
   },
 
   editDetourPath: function(routeID, detourID, new_path){
-    return db.query("UPDATE detour SET path = $1 WHERE id = $2 AND routes = $3", [new_path, detourID, routeID]); 
+    return db.query("UPDATE detour SET path = $1 WHERE id = $2 AND routes = $3", [new_path, detourID, routeID]);
   }
 
 
