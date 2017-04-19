@@ -30,13 +30,13 @@ module.exports = {
   },
 
   editRouteNumber: function(routeID, new_number){
-    return db.query("UPDATE route SET number = new_number WHERE id=$1", [routeID]);
+    return db.query("UPDATE route SET number = $1 WHERE id=$2", [new_number, routeID]);
   }
 
 }
 /*
   editValidBusTypes: function(routeID, new_bus_types){
-    return db.query("UPDATE route SET valid_bus_types = new_bus_types WHERE id=$1", [routeID]);
+    return db.query("UPDATE route SET valid_bus_types = $1 WHERE id=$1", [new_bus_types, routeID]);
   },
 
   deleteDetour: function(routeID, detourID){
