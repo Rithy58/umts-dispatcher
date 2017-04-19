@@ -37,18 +37,18 @@ describe('drivers', function(){
 		before(function() {
 			db.query("ALTER SEQUENCE driver_id_seq RESTART;");
 			db.query("DELETE FROM driver;");
-			var queryStr = "INSERT INTO driver (id, name, phone, late_count) VALUES ";
-			queryStr += "('2749', 'Not Hitler','999-999-9999', 3), ('43', 'Not Jesus','4', 0);";
+			var queryStr = "INSERT INTO driver (name, phone, late_count) VALUES ('Not Hitler','999-999-9999', 3), ('Not Jesus','4', 0);";
+			db.query(queryStr);
 		});
 		it('should return a driver by id', function() {
-			return driver.getDriverByID('2749')
+			return driver.getDriverByID('1')
 			.then(function(res) {
-				assert.deepEqual({
-					id: '2749',
+				assert.deepEqual(res.rows[0], {
+					id: '1',
 					name: 'Not Hitler',
-					PhoneNumber: '999-999-9999',
-					lateCount:'3'
-				}, res.rows[0]);
+					phone: '999-999-9999',
+					late_count:'3'
+				});
 			})
 		});
 	});
@@ -94,5 +94,24 @@ describe('drivers', function(){
 		});
 	});
 
+	describe('#removeDriver()', function() {
+		//Insert 4 entries into the database
+		before(function() {
+			db.query("ALTER SEQUENCE driver_id_seq RESTART;");
+			db.query("DELETE FROM driver;");
+			var queryStr = "INSERT INTO driver (name, phone, late_count) VALUES ('Jane Smith','473-834-3847', 1), ('Karl Marx','573-583-7586', 0), ('Not Hitler','999-999-9999', 3), ('Not Jesus','4', 0)";
+			return db.query(queryStr);
+		});
+
+		it('Should remove Karl Marx', function() {
+			return driver.removeDriver(2)
+			.then(function(res) {
+				assert(res.rowCount == 1, 'Result should contain 3 drivers');
+			})
+		});
+	});
 	
 });
+
+
+
