@@ -14,11 +14,11 @@ module.exports = {
   },
 
   getAvailableDetours: function(routeID){
-
+    return db.query("SELECT * FROM detour WHERE routes=$1", [routeID]);
   },
 
   getCurrentDetours: function(routeID){
-
+    return db.query("SELECT * FROM detour WHERE routes=$1", [routeID]);
   },
 
   getValidBusTrpes: function(routeID){
@@ -38,19 +38,19 @@ module.exports = {
   },
 
   deleteDetour: function(routeID, detourID){
-
+    return db.query("DELETE FROM detour WHERE id = $1 AND route = $2", [detourID, routeID])
   },
 
-  createDetour: function(routeID, detour){
-
+  createDetour: function(routeID, detourID){
+    return db.query("INSERT INTO detour (id, routes) VALUES ($1, $2)", [detourID, routeID]);
   },
 
   avtiveDetour: function(routeID, detourID, state){
-
+    return db.query("UPDATE detour SET is_avtive = $1 WHERE id = $2 AND routes = $3", [state, detourID, routeID]);
   },
 
-  editDetourPath: function(routeID, detourID, path){
-
+  editDetourPath: function(routeID, detourID, new_path){
+    return db.query("UPDATE detour SET path = $1 WHERE id = $2 AND routes = $3", [new_path, detourID, routeID]); 
   }
 
 
