@@ -17,7 +17,9 @@ module.exports = {
     return db.query(query, args);
   },
   getShift: function(shiftID) {
-    return false;
+  	query = "SELECT * FROM shift WHERE id=$1";
+  	args = [shiftID];
+    return db.query(query, args);
   },
   setStartTime: function(shiftID, time) {
     query = "UPDATE shift SET start_time=make_timestamptz($2,$3,$4,$5,$6,0) WHERE id=$1 RETURNING *;";
@@ -56,9 +58,13 @@ module.exports = {
     return false;
   },
   addShift: function(startTime, endTime, startLoc, endLoc, driverID, busID, route) {
-    return false;
+    query = "ADD shift WHERE startTime=$1, endTime=$2, startLoc=$3, endLoc=$4, driverID=$5, busID=$6, route=$7"
+    args = [startTime, endTime, startLoc, endLoc, driverID, busID, route];
+    return db.query(query, args);
   },
   driverAvailable: function(driverID, time) {
-    return false;
+    query = "SELECT shift FROM date_trunc('day', start_time) = make_timestamptz($1,$2,$3,0,0,0) WHERE id=$1 RETURNING *;";
+  	args = [driverID, time];
+    return db.query(query, args);
   },
 };
