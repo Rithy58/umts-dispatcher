@@ -18,6 +18,25 @@ describe('shiftManager', function(){
   after(function(){
     return db.query("DELETE FROM bus;");
   });
-  
 
+
+
+
+  describe('#setDriver()', function() {
+		//Insert 3 entries into the database
+		before(function() {
+      db.query("ALTER SEQUENCE {tablename}_id_seq RESTART;")
+			db.query("DELETE FROM shift;");
+			var queryStr = "INSERT INTO shift (start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES ";
+			queryStr += "('2012-02-18 14:28:32','2012-02-18 14:28:33', 'Campus Center', 'CS Building', '12', '123', '1');";
+			return db.query(queryStr);
+		});
+
+		it('should set driver for specific shift to 13', function() {
+			return shift.setDriver('123', '13')
+			.then(function(res) {
+				assert.equal('13', res.rows[0].driver_id);
+			});
+		});
+	});
 });
