@@ -31,6 +31,49 @@ describe('shiftManager', function(){
     return db.query(insertShift);
   });
 
+  describe('#getShiftByDay()', function() {
+    it('should return the shifts given a day', function() {
+      date = new Date(2017,3,17,8,0,0,0);
+      return shift.getShiftByDay(date)
+      .then(function(res) {
+        assert.equal(1,res.rowCount);
+      });
+    });
+  });
+
+  describe('#getShiftByDay()', function() {
+    it('should not return anything if there are no shifts today', function() {
+      date = new Date(2015,5,21,9,0,0,0);
+      return shift.getShiftByDay(date)
+      .then(function(res) {
+        assert.equal(0,res.rowCount);
+      });
+    });
+  });
+
+  describe('#getShiftByDay()', function() {
+    before(function() {
+      d = new Date();
+      var insertShift = `INSERT INTO shift (start_time, end_time, start_location,
+        end_location, driver_id, bus_id, route) VALUES
+        (make_timestamptz($1, $2, $3, 8, 0, 0),
+        make_timestamptz($1, $2, $3, 10, 0, 0),
+        'EXAMPLE', 'end location 1', 1,'bus1', 30);`;
+      return db.query(insertShift, [d.getFullYear(), d.getMonth() + 1, d.getDate()]);
+    });
+
+    it('should get todays shifts by default', function() {
+      return shift.getShiftByDay()
+      .then(function(res) {
+        assert.equal(1,res.rowCount);
+      });
+    });
+
+    after(function() {
+      db.query("DELETE FROM shift WHERE start_location = 'EXAMPLE' ")
+    })
+  });
+
   describe('#setStartTime()', function() {
 		it('should change the start time of a shift', function() {
       time = new Date(2017,3,1,8,0,0,0);
