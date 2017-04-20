@@ -62,7 +62,7 @@ module.exports = {
   },
   editIncident: function(incidentID, incidentStr) {
     query = "UPDATE incidents SET description=$2 WHERE id=$1 RETURNING *";
-    return db.query(query,[incidentStr,incidentID]);
+    return db.query(query,[incidentID,incidentStr]);
   },
   addShift: function(startTime, endTime, startLoc, endLoc, driverID, busID, route) {
     query = "INSERT INTO shift (start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES (make_timestamptz($1,$2,$3,$4,$5,0),make_timestamptz($6,$7,$8,$9,$10,0),$11,$12,$13,$14,$15) RETURNING *";

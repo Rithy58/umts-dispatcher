@@ -134,7 +134,6 @@ describe('shiftManager', function(){
         var queryStr = "INSERT INTO incidents (shift_id,description) VALUES (10, 'Bus crash')";
         return db.query(queryStr);
     });
-
     it('should return true with a successful insert.', function() {
       return shift.addIncident(11,'Bus Crash')
       .then(function(res) {
@@ -151,11 +150,35 @@ describe('shiftManager', function(){
         }, res.rows[0]);
       });
     });
-
-    after(function(){
-      return db.query("DELETE FROM incidents;");
-    });
   });
+
+  describe ('#getIncident()',function(){
+    it('should get the incidents', function() {
+      return shift.getIncident(11)
+      .then(function(res){
+        assert.deepEqual({
+          id: 2,
+          shift_id: 11,
+          description: 'Bus Crash'
+        }, res.rows[0]);
+        });
+      });
+  });
+
+    describe ('#editIncident()',function(){
+      it('should update incident description', function() {
+        return shift.editIncident(1,'Bus Crash was hella crazy')
+        .then(function(res){
+          assert.deepEqual({
+          id: 1,
+          shift_id: 10,
+          description: 'Bus Crash was hella crazy'
+        }, res.rows[0]);
+        });
+      });
+    });
+
+
 
   describe('#addShift()', function() {
     // insert entry into database
@@ -236,15 +259,15 @@ describe('shiftManager', function(){
   });
 
   after(function() {
-    return db.query("DELETE FROM shift;")
-    .then(function() {
-      return db.query("DELETE FROM driver;")
+      return db.query("DELETE FROM shift;")
       .then(function() {
-        return db.query("DELETE FROM bus;")
+        return db.query("DELETE FROM driver;")
         .then(function() {
-          return db.query("DELETE FROM route")
+          return db.query("DELETE FROM bus;")
+          .then(function() {
+            return db.query("DELETE FROM route")
+          })
         })
       })
-    })
-  });
+    });
 });
