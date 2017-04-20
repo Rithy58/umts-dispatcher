@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "5"
+  - "6"
+  - "6.9.2"
+  - "node"
+install:
+  - npm install
+script:
+  - npm test
+notifications:
+  email: false
