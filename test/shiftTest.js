@@ -205,10 +205,6 @@ describe('shiftManager', function(){
     before(function() {
       db.query("ALTER SEQUENCE shift_id_seq RESTART;")
       db.query("DELETE FROM shift;");
-      /**var queryStr = "INSERT INTO shift (id, start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES ";
-      queryStr += "('1', '2012-02-18 14:28:32','2012-02-18 14:28:33', 'Campus Center', 'CS Building', '12', '123', '1');";
-      var args = [start, end ]
-      return db.query(queryStr);*/
     });
 
     it('should add the shift', function() {
@@ -239,25 +235,22 @@ describe('shiftManager', function(){
         });
       });
     });
-  /**describe('#driverAvailable()', function() {
+  
+  describe('#driverAvailable()', function() {
     // insert entry into database
     before(function() {
       db.query("ALTER SEQUENCE shift_id_seq RESTART;")
       db.query("DELETE FROM shift;");
-      var queryStr = "INSERT INTO shift (id, start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES ";
-      queryStr += "('2', '2012-02-18 14:28:32','2012-02-18 14:28:33', 'Campus Center', 'CS Building', '12', '123', '1');";
-      return db.query(queryStr);
     });
 
     it('should get time from a driver', function() {
-      time = new Date(2017,3,1,8,0,0,0);
-      return shift.driverAvailable(12, time)
+      time1 = new Date(2017, 3, 1, 8, 0, 0, 0);
+      return shift.driverAvailable('12', time1)
       .then(function(res) {
-        var res_start_time = res.rows[0].start_time;
-        assert.equal('2017-04-01T08:00:00.000Z', res_start_time.toISOString());
+          assert.equal('2017-04-01T12:00:00.000Z', time1.toISOString());
       });
     });
-  });*/
+  });
 
   after(function() {
     return db.query("DELETE FROM shift;")

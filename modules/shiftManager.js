@@ -86,8 +86,9 @@ module.exports = {
     return db.query(query, args);
   },
   driverAvailable: function(driverID, time) {
-    query = "SELECT shift FROM date_trunc('day', start_time) = make_timestamptz($1,$2,$3,0,0,0) WHERE id=$1 RETURNING *;";
-  	args = [driverID, time];
+    query = "SELECT driver_id=$1 FROM shift WHERE start_time=make_timestamptz($2,$3,$4,$5,$6,0)";
+  	args = [driverID, time.getFullYear(), time.getMonth() + 1,
+    time.getDate(), time.getHours(), time.getMinutes()];
     return db.query(query, args);
   },
 };
