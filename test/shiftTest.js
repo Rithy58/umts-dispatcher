@@ -179,7 +179,6 @@ describe('shiftManager', function(){
     });
 
     it('should add new incidents', function() {
-      console.log('Line 183\n')
       return shift.addIncident(11,'Bus Crash')
       .then(function(res) {
         assert.equal(true, res.rows[0].success);
@@ -208,8 +207,8 @@ describe('shiftManager', function(){
     });
 
     it('should add the shift', function() {
-      start = new Date(2017, 3, 1, 8, 0, 0, 0);
-      end = new Date(2017, 3, 1, 10, 0, 0, 0);
+      var start = new Date(2017, 3, 1, 8, 0, 0, 0);
+      var end = new Date(2017, 3, 1, 10, 0, 0, 0);
       return shift.addShift(start, end, 'Campus Center', 'CS Building', '12', '123', '1')
         .then(function(res) {
           var actual = res.rows[0];
@@ -240,14 +239,24 @@ describe('shiftManager', function(){
     // insert entry into database
     before(function() {
       db.query("ALTER SEQUENCE shift_id_seq RESTART;")
+      db.query("ALTER SEQUENCE driver_id_seq RESTART;")
       db.query("DELETE FROM shift;");
+      db.query("DELETE FROM driver;");
+      db.query("INSERT INTO driver (name,phone,late_count) \
+        VALUES ('kazi','phone',0),('matt','phone',0),('colin','phone',0),('rithy','phone',0);");
+      var queryStr = "INSERT INTO shift (start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES \
+      (make_timestamptz(2017, 4, 1, 8, 0, 0), \
+      make_timestamptz(2017, 4, 1, 10, 0, 0), \
+      'EXAMPLE', 'end location 1',2,'bus1', 30);";
+      return db.query(queryStr);
     });
 
     it('should get time from a driver', function() {
-      time1 = new Date(2017, 3, 1, 8, 0, 0, 0);
-      return shift.driverAvailable('12', time1)
+      var start = new Date(2017, 3, 1, 9, 0, 0, 0);
+      var end = new Date(2017, 3, 1, 12, 0, 0, 0);
+      return shift.driversAvailable(start, end)
       .then(function(res) {
-          assert.equal('2017-04-01T12:00:00.000Z', time1.toISOString());
+        assert.equal(3, res.rowCount);
       });
     });
   });

@@ -85,10 +85,23 @@ module.exports = {
     route];
     return db.query(query, args);
   },
-  driverAvailable: function(driverID, time) {
-    query = "SELECT driver_id=$1 FROM shift WHERE start_time=make_timestamptz($2,$3,$4,$5,$6,0)";
-  	args = [driverID, time.getFullYear(), time.getMonth() + 1,
-    time.getDate(), time.getHours(), time.getMinutes()];
+  driversAvailable: function(startTime, endTime) {
+    query = "SELECT driver.id, driver.name FROM driver WHERE driver.id NOT IN \
+    (SELECT driver_id FROM shift WHERE \
+      (start_time <= make_timestamptz($1, $2, $3, $4, $5, 0) AND make_timestamptz($1, $2, $3, $4, $5, 0) < end_time) OR \
+      (start_time < make_timestamptz($6, $7, $8, $9, $10, 0) AND make_timestamptz($6, $7, $8, $9, $10, 0) <= end_time) OR \
+      (make_timestamptz($1, $2, $3, $4, $5, 0) <= start_time AND end_time <= make_timestamptz($6, $7, $8, $9, $10, 0)));";
+      args = [startTime.getFullYear(),
+      startTime.getMonth() + 1,
+      startTime.getDate(),
+      startTime.getHours(),
+      startTime.getMinutes(),
+      endTime.getFullYear(),
+      endTime.getMonth() + 1,
+      endTime.getDate(),
+      endTime.getHours(),
+      endTime.getMinutes()
+      ]
     return db.query(query, args);
   },
 };
