@@ -156,7 +156,6 @@ describe('shiftManager', function(){
     it('should get the incidents', function() {
       return shift.getIncident(11)
       .then(function(res){
-        console.log(res.rows[0]);
         assert.deepEqual({
           id: 2,
           shift_id: 11,
