@@ -179,11 +179,10 @@ describe('shiftManager', function(){
     });
 
     it('should add new incidents', function() {
-      console.log('Line 183\n')
       return shift.addIncident(11,'Bus Crash')
       .then(function(res) {
         assert.equal(true, res.rows[0].success);
-        return shift.getIncident(11)
+        return db.query("SELECT * FROM incidents WHERE shift_id = $1",[11])
         .then(function(res){
           assert.deepEqual({
           id: 2,
@@ -195,10 +194,37 @@ describe('shiftManager', function(){
     });
     after(function(){
       db.query("DELETE FROM incidents;");
-    })
-
-
+    });
   });
+
+  describe ('#getIncident()',function(){
+    it('should get the incidents', function() {
+      return shift.getIncident(11)
+      .then(function(res){
+        console.log(res.rows[0].anonymous);
+        assert.deepEqual({
+          id: 2,
+          shift_id: 11,
+          description: 'Bus Crash'
+        }, res.rows[0]);
+        });
+      });
+  });
+
+    describe ('#editIncident()',function(){
+      it('should add new incidents', function() {
+        return shift.editIncident(1,'Bus Crash was hella crazy')
+        .then(function(res){
+          assert.deepEqual({
+          id: 2,
+          shift_id: 11,
+          description: 'Bus Crash was hella crazy'
+          }, res);
+        });
+      });
+    });
+
+
 
     /**describe('#addShift()', function() {
     // insert entry into database
