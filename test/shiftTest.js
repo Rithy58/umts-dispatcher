@@ -180,8 +180,7 @@ describe('shiftManager', function(){
 
 
 
-/*  describe('#addShift()', function() {
->>>>>>> 364c57e8710ef57f27f94e627d6018774fd317f2
+  describe('#addShift()', function() {
     // insert entry into database
     before(function() {
       db.query("ALTER SEQUENCE shift_id_seq RESTART;")
@@ -257,7 +256,7 @@ describe('shiftManager', function(){
         assert.equal('kazi', res.rows[0].name);
       });
     });
-  });*/
+  });
 
   after(function() {
       return db.query("DELETE FROM shift;")
