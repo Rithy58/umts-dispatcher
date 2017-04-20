@@ -13,7 +13,6 @@ describe('busManager', function(){
 	describe('#getAllBuses()', function() {
 		//Insert 3 entries into the database
 		before(function() {
-			db.query("DELETE FROM bus;");
 			var queryStr = "INSERT INTO bus (id,type,defects) VALUES ";
 			queryStr += "('123', 'long','none'), ('456', 'old','none'), ('789', 'new','none');";
 			return db.query(queryStr);
@@ -24,6 +23,10 @@ describe('busManager', function(){
 			.then(function(res) {
 				assert(res.rowCount == 3, 'Result should contain 3 buses.');
 			});
+		});
+
+		after(function() {
+			return db.query("DELETE FROM bus");
 		});
 	});
 
@@ -39,6 +42,9 @@ describe('busManager', function(){
 			.then(function(res) {
 				assert(res.rows[0].defects == 'none', "Result should have defect string say 'none'.");
 			});
+		});
+		after(function() {
+			return db.query("DELETE FROM bus");
 		});
 	});
 
@@ -57,6 +63,9 @@ describe('busManager', function(){
 				}, res.rows[0]);
 			});
 		});
+		after(function() {
+			return db.query("DELETE FROM bus");
+		});
 	});
 
 	describe('#editDefects()', function() {
@@ -72,6 +81,9 @@ describe('busManager', function(){
 				assert.equal('new defect', res.rows[0].defects);
 			});
 		});
+		after(function() {
+			return db.query("DELETE FROM bus");
+		});
 	});
 
 	describe('#removeBus()', function() {
@@ -86,6 +98,9 @@ describe('busManager', function(){
 			.then(function(res) {
 				assert.equal(true, res.rows[0].success);
 			})
+		});
+		after(function() {
+			return db.query("DELETE FROM bus");
 		});
 	});
 
@@ -105,6 +120,9 @@ describe('busManager', function(){
 					defects: 'none'
 				}, res.rows[0]);
 			})
+		});
+		after(function() {
+			return db.query("DELETE FROM bus");
 		});
 	});
 

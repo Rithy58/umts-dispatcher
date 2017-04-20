@@ -62,16 +62,46 @@ module.exports = {
   },
   editIncident: function(incidentID, incidentStr) {
     query = "UPDATE incidents SET description=$2 WHERE id=$1 RETURNING *";
-    return db.query(query,[incidentStr,incidentID]);
+    return db.query(query,[incidentID,incidentStr]);
   },
   addShift: function(startTime, endTime, startLoc, endLoc, driverID, busID, route) {
-    query = "ADD shift WHERE startTime=$1, endTime=$2, startLoc=$3, endLoc=$4, driverID=$5, busID=$6, route=$7"
-    args = [startTime, endTime, startLoc, endLoc, driverID, busID, route];
+    query = "INSERT INTO shift (start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES (make_timestamptz($1,$2,$3,$4,$5,0),make_timestamptz($6,$7,$8,$9,$10,0),$11,$12,$13,$14,$15) RETURNING *";
+    var args = [startTime.getFullYear(),
+    startTime.getMonth() + 1,
+    startTime.getDate(),
+    startTime.getHours(),
+    startTime.getMinutes(),
+
+    endTime.getFullYear(),
+    endTime.getMonth() + 1,
+    endTime.getDate(),
+    endTime.getHours(),
+    endTime.getMinutes(),
+
+    startLoc,
+    endLoc,
+    driverID,
+    busID,
+    route];
     return db.query(query, args);
   },
-  driverAvailable: function(driverID, time) {
-    query = "SELECT shift FROM date_trunc('day', start_time) = make_timestamptz($1,$2,$3,0,0,0) WHERE id=$1 RETURNING *;";
-  	args = [driverID, time];
+  driversAvailable: function(startTime, endTime) {
+    query = "SELECT driver.id, driver.name FROM driver WHERE driver.id NOT IN \
+    (SELECT driver_id FROM shift WHERE \
+      (start_time <= make_timestamptz($1, $2, $3, $4, $5, 0) AND make_timestamptz($1, $2, $3, $4, $5, 0) < end_time) OR \
+      (start_time < make_timestamptz($6, $7, $8, $9, $10, 0) AND make_timestamptz($6, $7, $8, $9, $10, 0) <= end_time) OR \
+      (make_timestamptz($1, $2, $3, $4, $5, 0) <= start_time AND end_time <= make_timestamptz($6, $7, $8, $9, $10, 0)));";
+      args = [startTime.getFullYear(),
+      startTime.getMonth() + 1,
+      startTime.getDate(),
+      startTime.getHours(),
+      startTime.getMinutes(),
+      endTime.getFullYear(),
+      endTime.getMonth() + 1,
+      endTime.getDate(),
+      endTime.getHours(),
+      endTime.getMinutes()
+      ]
     return db.query(query, args);
   },
 };
