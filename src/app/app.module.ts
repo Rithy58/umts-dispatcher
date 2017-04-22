@@ -1,20 +1,29 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { NgModule }       from '@angular/core';
+import { BrowserModule }  from '@angular/platform-browser';
+import { FormsModule }    from '@angular/forms';
+import {MdSidenavModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import { AppComponent } from './app.component';
+import { AppComponent }         from './app.component';
+import { ShiftManagementComponent }   from './shift-management/shift-management.component';
+import { ShiftService }          from './shift-management/shift.service';
+
+
+import { AppRoutingModule }     from './app-routing.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MdSidenavModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    ShiftManagementComponent,
+  ],
+  providers: [ ShiftService ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
