@@ -1,36 +1,17 @@
-export class Shift {
+export class Route {
   id: number;
-  startTime: Date;
-  endTime: Date;
-  startLocation: string;
-  endLocation: string;
-  route: number;
-  driverID: number;
-  busID: string;
+  number: number;
+  validBusType: string;
 
-  constructor(id: number, startTime: Date, endTime: Date,
-    startLocation: string, endLocation: string,
-    route: number, driverID: number, busID: string) {
+  constructor(id: number, number: number, validBusType: string) {
       this.id = id;
-      this.startTime = startTime;
-      this.endTime = endTime;
-      this.startLocation = startLocation;
-      this.endLocation = endLocation;
-      this.route = route;
-      this.driverID = driverID;
-      this.busID = busID;
-    }
+      this.number = number;
+      this.validBusType = validBusType;
+      }
 
-  updateData(startTime: Date, endTime: Date,
-    startLocation: string, endLocation: string,
-    route: number, driverID: number, busID: string) {
-      this.startTime = startTime;
-      this.endTime = endTime;
-      this.startLocation = startLocation;
-      this.endLocation = endLocation;
-      this.route = route;
-      this.driverID = driverID;
-      this.busID = busID;
+  updateData(number: number, validBusType: string) {
+      this.number = number;
+      this.validBusType = validBusType;
   }
 
 
