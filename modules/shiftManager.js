@@ -57,7 +57,7 @@ module.exports = {
     return db.query(query,[shiftID]);
   },
   deleteIncident: function(incidentID) {
-    query = "DELETE FROM incidents WHERE id=$1 RETURNING true AS success";
+    query = "DELETE FROM incidents WHERE id=$1 RETURNING $1 AS id";
     return db.query(query,incidentID);
   },
   editIncident: function(incidentID, incidentStr) {

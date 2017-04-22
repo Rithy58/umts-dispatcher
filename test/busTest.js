@@ -96,7 +96,7 @@ describe('busManager', function(){
 		it('should remove the bus given an id', function() {
 			return bus.removeBus('123')
 			.then(function(res) {
-				assert.equal(true, res.rows[0].success);
+				assert.equal('123', res.rows[0].id);
 			})
 		});
 		after(function() {

@@ -94,7 +94,7 @@ describe('drivers', function(){
 		});
 	});
 
-	describe('#removeDriver()', function() {
+	describe('#deleteDriver()', function() {
 		//Insert 4 entries into the database
 		before(function() {
 			db.query("ALTER SEQUENCE driver_id_seq RESTART;");
@@ -104,7 +104,7 @@ describe('drivers', function(){
 		});
 
 		it('Should remove Karl Marx', function() {
-			driver.removeDriver(2).then(
+			driver.deleteDriver(2).then(
 				db.query("SELECT * FROM driver")
 				.then(function(res) {
 					assert.equal(res.rowCount, 3, 'Result should contain 3 drivers');
@@ -113,6 +113,3 @@ describe('drivers', function(){
 		);
 	});
 });
-
-
-

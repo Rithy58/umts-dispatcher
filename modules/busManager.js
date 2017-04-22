@@ -22,7 +22,7 @@ module.exports = {
   },
 
   removeBus: function(busID){
-    return db.query("DELETE FROM bus WHERE id=$1 RETURNING true AS success",[busID]);
+    return db.query("DELETE FROM bus WHERE id=$1 RETURNING $1 AS id",[busID]);
   },
 
   getBusByID: function(busID){
