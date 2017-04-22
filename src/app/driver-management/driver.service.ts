@@ -12,7 +12,7 @@ export class DriverService {
 
   // This will always load the drivers that have been requested.
   // For this data to be updated, a message needs to be sent to the socket
-  getDrivers() {
+  getAllDrivers() {
     let observable = new Observable(observer => {
       this.socket.on('update drivers', (data) => {
         observer.next(data);
