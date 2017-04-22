@@ -15,8 +15,8 @@ module.exports = {
     return db.query(QUERY);
   },
 
-  removeDriver: function(driverID){
-    QUERY = "DELETE FROM driver WHERE id=$1 RETURNING *";
+  deleteDriver: function(driverID){
+    QUERY = "DELETE FROM driver WHERE id=$1 RETURNING $1 AS id";
     ARGS = [driverID];
     return db.query(QUERY, ARGS);
   },

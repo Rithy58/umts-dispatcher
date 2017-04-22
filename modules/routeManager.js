@@ -22,7 +22,7 @@ module.exports = {
   },
 
   deleteRoute: function(routeID){
-    return db.query("DELETE FROM route WHERE number=$1", [routeID]);
+    return db.query("DELETE FROM route WHERE number=$1 RETURNING $1 as id", [routeID]);
   }
 
 }
