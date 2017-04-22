@@ -22,7 +22,28 @@ module.exports = {
   },
 
   deleteRoute: function(routeNumber){
-    return db.query("DELETE FROM route WHERE number=$1 RETURNING $1 as id", [routeNumber]);
+    return db.query("DELETE FROM route WHERE number=$1 RETURNING $1 as number", [routeNumber]);
+  },
+
+  getAllDetours: function(){
+    return db.query("SELECT * FROM detour");
+  },
+
+  deleteDetour: function(detourID) {
+	   return db.query("DELETE FROM detour WHERE id=$1 RETURNING $1 as id", [detourID]);
+  },
+
+  createDetour: function(path, routeNumber) {
+	   return db.query("INSERT INTO detour (path, routes) VALUES ($1,$2) RETURNING true AS success", [path, routeNumber]);
+  },
+
+  activateDetour: function(detourID) {
+	   return db.query("UPDATE detour SET is_active=true WHERE id=$1 RETURNING *", [detourID]);
+  },
+
+  editDetourPath: function(detourID, path, routNumber) {
+    return db.query("UPDATE detour SET path=$2, routes=$3   WHERE id=$1 RETURNING *", [detourID, path, routeNumber]);
   }
+
 
 }
