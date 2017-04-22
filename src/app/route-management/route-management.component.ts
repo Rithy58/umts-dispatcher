@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Route } from './route;
+import { Route } from './route';
 import { RouteService } from './route.service';
 
 @Component({
@@ -16,11 +16,11 @@ export class RouteManagementComponent implements OnInit {
   // Listener for all routes
   getRoutesConnection;
 
-  constructor(private routeService: RouteService) { }
+  constructor(private RouteService: RouteService) { }
 
   ngOnInit(): void {
-    this.RouteService.getAllRoutes;
-    this.getRoutesConnection = this.RouteService.getRoutes()
+    this.RouteService.getAllRoutes();
+    this.getRoutesConnection = this.RouteService.getAllRoutes()
       .subscribe(array => {
         for (let i in array) {
           // create a route object in the front end for each route JSON.
@@ -30,7 +30,7 @@ export class RouteManagementComponent implements OnInit {
           this.routes.forEach(function(s) {
             if (s.id === route.id) {
               inRouteArr = true;
-              s.updateData(route.id, route.number, route.valid_bus_types);
+              s.updateData(route.number, route.valid_bus_types);
             }
           });
           // Insert if we didnt find it.
