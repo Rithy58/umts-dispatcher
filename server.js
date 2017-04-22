@@ -5,7 +5,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 // Import data access components
-var shift = require('./modules/shiftmanager');
+var shift = require('./modules/shiftManager');
 var bus = require('./modules/busManager');
 var driver = require('./modules/driverManager');
 var route = require('./modules/routeManager');
@@ -13,6 +13,10 @@ var route = require('./modules/routeManager');
 app.set('port', process.env.PORT || 8080);
 app.use(express.static('./dist'));
 
+// For now lets redirect everyone to the homepage
+app.get('*', function (req, res) {
+    res.redirect('/');
+});
 
 io.on('connection', function(socket) {
   console.log('a user connected');
@@ -317,7 +321,7 @@ io.on('connection', function(socket) {
     .catch(function(err){
         console.error(err);
     })
-});
+  });
 
   //user adds a driver
   //send to all clients

@@ -1,0 +1,10 @@
+<div class="grid grid-pad">
+  <a *ngFor="let driver of drivers"  class="col-1-4">
+    <div class="module hero">
+      <p>ID: {{driver.id}}</p>
+      <p>Name: {{driver.name}}</p>
+      <p>Phone: {{driver.phone}}</p>
+      <p>Late Count: {{driver.late_count}}</p>
+    </div>
+  </a>
+</div>
