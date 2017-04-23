@@ -19,7 +19,7 @@ export class BusManagementComponent implements OnInit {
   constructor(private BusService: BusService) { }
 
   ngOnInit(): void {
-    this.BusService.getAllBuses;
+    this.BusService.getTheBuses();
     this.getBusConnection = this.BusService.getAllBuses()
       .subscribe(array => {
         for (let i in array) {
