@@ -8,7 +8,7 @@ import { BusManagementComponent }   from './bus-management/bus-management.compon
 //import { RouteManagementComponent } from './route-management/route-management.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/shifts', pathMatch: 'full' },
+  { path: '', redirectTo: '/buses', pathMatch: 'full' },
   { path: 'shifts',  component: ShiftManagementComponent },
   //{ path: 'drivers',  component: DriverManagementComponent },
   //{ path: 'routes',  component: RouteManagementComponent },
