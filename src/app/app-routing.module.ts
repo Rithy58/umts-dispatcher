@@ -8,9 +8,9 @@ import { BusManagementComponent }   from './bus-management/bus-management.compon
 const routes: Routes = [
   { path: '', redirectTo: '/shifts', pathMatch: 'full' },
   { path: 'shifts',  component: ShiftManagementComponent },
-  // { path: 'drivers',  component: DriverManagementComponent },
-  // { path: 'routes',  component: RouteManagementComponent },
-  // { path: 'bus',  component: BusManagementComponent },
+  //{ path: 'drivers',  component: DriverManagementComponent },
+  //{ path: 'routes',  component: RouteManagementComponent },
+  { path: 'bus',  component: BusManagementComponent },
 ];
 
 @NgModule({
