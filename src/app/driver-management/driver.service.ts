@@ -10,7 +10,7 @@ export class DriverService {
   private socket = io(this.url);
 
   getAllDrivers(){
-    this.socket.emit('getShifts');
+    this.socket.emit('getAllDrivers');
   }
 
   // This will always load the drivers that have been requested.
