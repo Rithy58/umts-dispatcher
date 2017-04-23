@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'shifts',  component: ShiftManagementComponent },
   //{ path: 'drivers',  component: DriverManagementComponent },
   //{ path: 'routes',  component: RouteManagementComponent },
-  { path: 'bus',  component: BusManagementComponent },
+  { path: 'buses',  component: BusManagementComponent },
 ];
 
 @NgModule({
