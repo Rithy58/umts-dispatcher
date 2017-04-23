@@ -7,8 +7,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppComponent }         from './app.component';
 import { ShiftManagementComponent }   from './shift-management/shift-management.component';
 import {BusManagementComponent} from './bus-management/bus-management.component';
+import {RouteManagementComponent} from './route-management/route-management.component';
 import {BusService}     from './bus-management/bus.service';
 import { ShiftService }          from './shift-management/shift.service';
+import { RouteService }          from './route-management/route.service';
 
 
 import { AppRoutingModule }     from './app-routing.module';
@@ -24,9 +26,10 @@ import { AppRoutingModule }     from './app-routing.module';
   declarations: [
     AppComponent,
     ShiftManagementComponent,
-    BusManagementComponent
+    BusManagementComponent,
+    RouteManagementComponent
   ],
-  providers: [ ShiftService,BusService ],
+  providers: [ ShiftService,BusService, RouteService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
