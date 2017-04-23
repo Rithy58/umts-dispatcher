@@ -19,6 +19,7 @@ export class DriverManagementComponent implements OnInit {
   constructor(private DriverService: DriverService) { }
 
   ngOnInit(): void {
+    this.DriverService.connect();
     this.DriverService.getAllDrivers();
     this.getDriversConnection = this.DriverService.getDrivers()
       .subscribe(array => {

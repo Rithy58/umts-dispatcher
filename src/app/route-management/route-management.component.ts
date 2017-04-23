@@ -19,6 +19,7 @@ export class RouteManagementComponent implements OnInit {
   constructor(private RouteService: RouteService) { }
 
   ngOnInit(): void {
+    this.RouteService.connect();
     this.RouteService.getAllRoutes();
     this.getRoutesConnection = this.RouteService.getRoutes()
       .subscribe(array => {

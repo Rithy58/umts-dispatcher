@@ -19,6 +19,7 @@ export class ShiftManagementComponent implements OnInit {
   constructor(private ShiftService: ShiftService) { }
 
   ngOnInit(): void {
+    this.ShiftService.connect();
     this.ShiftService.getShiftByDay(new Date(2017,3,17,0,0,0,0));
     this.getShiftsConnection = this.ShiftService.getShifts()
       .subscribe(array => {

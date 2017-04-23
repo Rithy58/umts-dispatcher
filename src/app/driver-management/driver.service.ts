@@ -7,7 +7,11 @@ import * as io from 'socket.io-client';
 @Injectable()
 export class DriverService {
   private url = "http://localhost:8080";
-  private socket = io(this.url);
+  private socket;
+
+  connect() {
+    this.socket = io(this.url);
+  }
 
   getAllDrivers(){
     this.socket.emit('getAllDrivers');
