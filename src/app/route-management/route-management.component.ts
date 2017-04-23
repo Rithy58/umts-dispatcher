@@ -20,7 +20,7 @@ export class RouteManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.RouteService.getAllRoutes();
-    this.getRoutesConnection = this.RouteService.getAllRoutes()
+    this.getRoutesConnection = this.RouteService.getRoutes()
       .subscribe(array => {
         for (let i in array) {
           // create a route object in the front end for each route JSON.

@@ -86,7 +86,7 @@ io.on('connection', function(socket) {
   socket.on('setBus', function(params) {
       shift.setBus(params.shiftID,  params.busID)
       .then(function(res) {
-          io.emit('update shifts', res.rows);
+          io.emit('update buses', res.rows);
       })
       .catch(function(err) {
           console.error(err);
@@ -98,7 +98,7 @@ io.on('connection', function(socket) {
   socket.on('setRoute', function(params) {
       shift.setRoute(params.shiftID,  params.route)
       .then(function(res) {
-          io.emit('update shifts', res.rows);
+          io.emit('update routes', res.rows);
       })
       .catch(function(err) {
           console.error(err);
