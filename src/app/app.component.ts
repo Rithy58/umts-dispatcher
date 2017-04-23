@@ -3,14 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'my-app',
   template: `
-    <h1>{{title}}</h1>
-    <nav>
-      <a routerLink="/buses" routerLinkActive="active">Bus Management</a>
-      <a routerLink="/shifts" routerLinkActive="active">Shift Management</a>
-      <a routerLink="/drivers" routerLinkActive="active">Drivers</a>
-
-    </nav>
-    <router-outlet></router-outlet>
+    <sidenav></sidenav>
   `,
   styleUrls: ['./app.component.css'],
 })
