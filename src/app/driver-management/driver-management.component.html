@@ -1,3 +1,10 @@
+<div>
+  <label>Name:</label> <input #driverName />
+  <label>Phone number:</label> <input #driverPhone />
+  <button (click)="add(driverName.value, driverPhone.value); driverName.value=''; driverPhone.value=''">
+    Add
+  </button>
+</div>
 <div class="grid grid-pad">
   <a *ngFor="let driver of drivers"  class="col-1-4">
     <div class="module hero">

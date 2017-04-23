@@ -13,6 +13,14 @@ export class DriverService {
     this.socket = io(this.url);
   }
 
+  addDriver(name: string, phone: string) {
+    this.socket.emit('addDriver', {
+      name: name,
+      phone: phone,
+      late_count: 0
+    });
+  }
+
   getAllDrivers(){
     this.socket.emit('getAllDrivers');
   }
