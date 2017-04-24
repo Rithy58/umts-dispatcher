@@ -3,7 +3,7 @@ import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdSidenavModule, MdListModule,
-  MdToolbarModule, MdIconModule, MdInputModule } from '@angular/material';
+  MdToolbarModule, MdIconModule, MdInputModule, MdDialogModule } from '@angular/material';
 
 import { AppComponent }         from './app.component';
 import { SidenavComponent }       from './sidenav/sidenav.component';
@@ -15,6 +15,7 @@ import { ShiftService }          from './shift-management/shift.service';
 import { BusService }     from './bus-management/bus.service';
 import { RouteService }          from './route-management/route.service';
 import { DriverService }          from './driver-management/driver.service';
+import { AddDriverDialog }          from './driver-management/driver-management.component';
 
 import { AppRoutingModule }     from './app-routing.module';
 
@@ -29,6 +30,7 @@ import { AppRoutingModule }     from './app-routing.module';
     MdToolbarModule,
     MdIconModule,
     MdInputModule,
+    MdDialogModule,
   ],
   declarations: [
     AppComponent,
@@ -36,9 +38,11 @@ import { AppRoutingModule }     from './app-routing.module';
     ShiftManagementComponent,
     BusManagementComponent,
     DriverManagementComponent,
-    RouteManagementComponent
+    RouteManagementComponent,
+    AddDriverDialog,
   ],
   providers: [ ShiftService, BusService, RouteService, DriverService ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [ AppComponent ],
+  entryComponents: [AddDriverDialog],
 })
 export class AppModule { }
