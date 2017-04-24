@@ -73,4 +73,11 @@ export class BusManagementComponent implements OnInit {
 })
 export class AddBusDialog{
   constructor(public dialogRef: MdDialogRef<AddBusDialog>){}
+
+  selectedType: string;
+
+  types = [
+    {viewValue: 'Single'},
+    {viewValue: 'Double'}
+  ];
 }

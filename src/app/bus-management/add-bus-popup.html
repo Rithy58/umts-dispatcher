@@ -8,13 +8,17 @@
           </md-input-container></td>
         </tr>
         <tr>
-          <td><md-input-container>
-            <input mdInput placeholder="Type" #busType>
-          </md-input-container></td>
+          <td>
+            <md-select placeholder="Select Bus Type" [(ngModel)]="selectedType" name="busType">
+              <md-option *ngFor="let type of types" [value]="type.viewValue">
+                {{ type.viewValue }}
+              </md-option>
+            </md-select>
+        </td>
         </tr>
       </table>
   </form>
 </div>
 <div md-dialog-actions>
-  <button md-button (click)="dialogRef.close([busID.value,busType.value])">Save</button>
+  <button md-button (click)="dialogRef.close([busID.value,this.selectedType])">Save</button>
 </div>
