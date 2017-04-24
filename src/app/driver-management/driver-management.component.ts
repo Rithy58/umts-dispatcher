@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MdDialog } from '@angular/material';
+import {MdDialog, MdDialogRef} from '@angular/material';
 
 import { Driver } from './driver';
 import { DriverService } from './driver.service';
@@ -21,7 +21,7 @@ export class DriverManagementComponent implements OnInit {
 
   constructor(private DriverService: DriverService, private dialog: MdDialog) { }
 
-  add(name: string, phone: string): void {
+  addDriver(name: string, phone: string): void {
     this.DriverService.addDriver(name, phone);
   }
 
@@ -53,11 +53,11 @@ export class DriverManagementComponent implements OnInit {
     this.getDriversConnection.unsubscribe();
   }
 
-  openAddDriverDialog() {
-    let addDriverDialogRef = this.dialog.open(AddDriverDialog);
-    addDriverDialogRef.afterClosed().subscribe(res => {
-      if (res) {
-        this.add(res[0], res[1])
+  openDialog() {
+    let dialogRef = this.dialog.open(AddDriverDialog);
+    dialogRef.afterClosed().subscribe(res => {
+      if(res) {
+        this.addDriver(res[0],res[1]);
       }
     });
   }
@@ -69,4 +69,6 @@ export class DriverManagementComponent implements OnInit {
   templateUrl: './driver-management-add-driver-dialog.component.html',
   styleUrls: [ './driver-management-add-driver-dialog.component.css' ]
 })
-export class AddDriverDialog {}
+export class AddDriverDialog {
+  constructor(public dialogRef: MdDialogRef<AddDriverDialog>) {}
+}
