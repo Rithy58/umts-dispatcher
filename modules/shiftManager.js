@@ -64,8 +64,8 @@ module.exports = {
   },
   addShift: function(startTime, endTime, startLoc, endLoc, driverID, busID, route) {
     query = "INSERT INTO shift (start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *";
-    var args = [new Date(startTime),
-    new Date(endTime),
+    var args = [startTime,
+    endTime,
     startLoc,
     endLoc,
     driverID,
