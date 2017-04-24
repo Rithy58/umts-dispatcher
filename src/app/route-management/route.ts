@@ -3,8 +3,7 @@ export class Route {
   number: number;
   validBusType: string;
 
-  constructor(id: number, number: number, validBusType: string) {
-      this.id = id;
+  constructor(number: number, validBusType: string) {
       this.number = number;
       this.validBusType = validBusType;
       }

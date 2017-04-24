@@ -1,51 +1,48 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Shift } from './shift';
-import { ShiftService } from './shift.service';
+import { Bus } from './bus';
+import { BusService } from './bus.service';
 
 @Component({
-  selector: 'shift-management',
-  templateUrl: './shift-management.component.html',
-  styleUrls: [ './shift-management.component.css' ]
+  selector: 'bus-management',
+  templateUrl: './bus-management.component.html',
+  styleUrls: [ './bus-management.component.css' ]
 })
-export class ShiftManagementComponent implements OnInit {
+export class BusManagementComponent implements OnInit {
 
-  // Clients local Shift[] array for displaying
-  shifts: Shift[] = [];
+  // Clients local Bus[] array for displaying
+  buses: Bus[] = [];
 
-  // Listener for all shifts
-  getShiftsConnection;
+  // Listener for all buses
+  getBusConnection;
 
-  constructor(private ShiftService: ShiftService) { }
+  constructor(private BusService: BusService) { }
 
   ngOnInit(): void {
-    this.ShiftService.getShiftByDay(new Date(2017,3,17,0,0,0,0));
-    this.getShiftsConnection = this.ShiftService.getShifts()
+    this.BusService.connect();
+    this.BusService.getTheBuses();
+    this.getBusConnection = this.BusService.getAllBuses()
       .subscribe(array => {
         for (let i in array) {
-          // create a Shift object in the front end for each shift JSON.
-          var shift = array[i];
-          let inShiftArr = false;
-          // If this shift is already in the array, just update the data.
-          this.shifts.forEach(function(s) {
-            if (s.id === shift.id) {
-              inShiftArr = true;
-              s.updateData(shift.start_time, shift.end_time,
-                shift.start_location, shift.end_location,
-                shift.route, shift.driver_id, shift.bus_id);
+          // create a Driver object in the front end for each driver JSON.
+          var bus = array[i];
+          let inBusarr = false;
+          // If this driver is already in the array, just update the data.
+          this.buses.forEach(function(currBus) {
+            if (currBus.id === bus.id) {
+              inBusarr = true;
+              currBus.updateData(bus.type, bus.defects);
             }
           });
           // Insert if we didnt find it.
-          if (inShiftArr === false) {
-            this.shifts.push(new Shift(shift.id, shift.start_time,
-              shift.end_time, shift.start_location, shift.end_location,
-              shift.route, shift.driver_id, shift.bus_id));
+          if (inBusarr === false) {
+            this.buses.push(new Bus(bus.id, bus.type, bus.defects));
           }
         }
       })
   }
 
   ngOnDestroy() {
-    this.getShiftsConnection.unsubscribe();
+    this.getBusConnection.unsubscribe();
   }
 }
