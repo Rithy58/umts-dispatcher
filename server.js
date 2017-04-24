@@ -170,7 +170,7 @@ io.on('connection', function(socket) {
   // User gets list of available drivers
   // Send to specific client
   socket.on('driversAvailable', function(params) {
-    shift.driverAvailable(params.startTime, params.endTime)
+    shift.driversAvailable(params.startTime, params.endTime)
     .then(function(res) {
       socket.emit('update available drivers', res.rows);
     })

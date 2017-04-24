@@ -11,8 +11,8 @@
         <input mdInput placeholder="Driver Phone" #driverPhone>
       </md-input-container>
     </tr>
-    <tr>
-      <button md-button (click)="addDriverDialogRef.close([driverName.value, driverPhone.value])">Add</button>
-    </tr>
   </table>
 </form>
+<div md-dialog-actions>
+  <button md-button (click)="dialogRef.close([driverName.value, driverPhone.value])">Add</button>      
+</div>

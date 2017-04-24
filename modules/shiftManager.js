@@ -76,20 +76,10 @@ module.exports = {
   driversAvailable: function(startTime, endTime) {
     query = "SELECT driver.id, driver.name FROM driver WHERE driver.id NOT IN \
     (SELECT driver_id FROM shift WHERE \
-      (start_time <= make_timestamptz($1, $2, $3, $4, $5, 0) AND make_timestamptz($1, $2, $3, $4, $5, 0) < end_time) OR \
-      (start_time < make_timestamptz($6, $7, $8, $9, $10, 0) AND make_timestamptz($6, $7, $8, $9, $10, 0) <= end_time) OR \
-      (make_timestamptz($1, $2, $3, $4, $5, 0) <= start_time AND end_time <= make_timestamptz($6, $7, $8, $9, $10, 0)));";
-      args = [startTime.getFullYear(),
-      startTime.getMonth() + 1,
-      startTime.getDate(),
-      startTime.getHours(),
-      startTime.getMinutes(),
-      endTime.getFullYear(),
-      endTime.getMonth() + 1,
-      endTime.getDate(),
-      endTime.getHours(),
-      endTime.getMinutes()
-      ]
+      (start_time <= $1 AND $1 < end_time) OR \
+      (start_time < $2 AND $2 <= end_time) OR \
+      ($1 <= start_time AND end_time <= $2));";
+      args = [startTime, endTime]
     return db.query(query, args);
   },
 };
