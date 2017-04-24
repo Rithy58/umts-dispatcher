@@ -5,6 +5,24 @@
     Add
   </button>
 </div>
+<form class="DriverManagementComponent">
+  <table>
+    <td>
+      <md-input-container>
+        <input mdInput placeholder="Driver Name" #driverName>
+      </md-input-container>
+    </td>
+    <td>
+      <md-input-container>
+        <input mdInput placeholder="Driver Phone" #driverPhone>
+      </md-input-container>
+    </td>
+    <td>
+      <button md-button (click)="add(driverName.value, driverPhone.value); driverName.value=''; driverPhone.value=''">Add</button>
+    </td>
+  </table>
+</form>
+<button md-button (click)="openAddDriverDialog()">Add Driver</button>
 <div class="grid grid-pad">
   <a *ngFor="let driver of drivers"  class="col-1-4">
     <div class="module hero">
