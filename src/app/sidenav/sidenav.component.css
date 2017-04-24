@@ -5,9 +5,13 @@ md-sidenav-container, .my-content {
 }
 
 .sidenav {
-  width: 300px;
+  width: 250px;
 }
-
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 .my-content {
-  padding: 10px;
+  padding: 20px;
 }

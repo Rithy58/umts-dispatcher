@@ -7,13 +7,11 @@
 </div>
 
 <div class="grid grid-pad">
-  <md-spinner>
-    <a *ngFor="let bus of buses"  class="col-1-4">
-      <div class="module hero">
-        <p>ID: {{bus.id}}</p>
-        <p>Type: {{bus.type}}</p>
-        <p>Defects: {{bus.defects}}</p>
-      </div>
-    </a>
-  </md-spinner>
+  <a *ngFor="let bus of buses"  class="col-1-4">
+    <div class="module hero">
+      <p>ID: {{bus.id}}</p>
+      <p>Type: {{bus.type}}</p>
+      <p>Defects {{bus.defects}}</p>
+    </div>
+  </a>
 </div>

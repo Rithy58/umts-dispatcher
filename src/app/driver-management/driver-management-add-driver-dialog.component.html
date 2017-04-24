@@ -1,0 +1,17 @@
+<form class="DriverManagementComponent">
+  <table>
+    <tr>
+      <md-input-container>
+        <input mdInput placeholder="Driver Name" #driverName>
+      </md-input-container>
+    </tr>
+    <tr>
+      <md-input-container>
+        <input mdInput placeholder="Driver Phone" #driverPhone>
+      </md-input-container>
+    </tr>
+    <tr>
+      <button md-button (click)="add(driverName.value, driverPhone.value); driverName.value=''; driverPhone.value=''">Add</button>
+    </tr>
+  </table>
+</form>
