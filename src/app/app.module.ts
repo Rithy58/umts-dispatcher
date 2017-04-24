@@ -39,7 +39,8 @@ import { AppRoutingModule }     from './app-routing.module';
     AddDriverDialog,
     AddBusDialog
   ],
-  entryComponents: [ShiftManagementCreateNewDialog,AddBusDialog],
+
+  entryComponents: [ShiftManagementCreateNewDialog, AddDriverDialog,AddBusDialog],
   providers: [ ShiftService, BusService, RouteService, DriverService ],
   bootstrap: [ AppComponent ]
 })

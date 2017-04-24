@@ -1,16 +1,14 @@
 export class Route {
-  id: number;
-  number: number;
-  validBusType: string;
+  routeID: number;
+  validBusTypes: string;
 
-  constructor(number: number, validBusType: string) {
-      this.number = number;
-      this.validBusType = validBusType;
+  constructor(routeID: number, validBusTypes: string) {
+      this.routeID = routeID;
+      this.validBusTypes = validBusTypes;
       }
 
-  updateData(number: number, validBusType: string) {
-      this.number = number;
-      this.validBusType = validBusType;
+  updateData(validBusTypes: string) {
+      this.validBusTypes = validBusTypes;
   }
   
 

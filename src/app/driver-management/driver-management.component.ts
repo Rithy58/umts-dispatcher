@@ -54,7 +54,12 @@ export class DriverManagementComponent implements OnInit {
   }
 
   openAddDriverDialog() {
-    this.dialog.open(AddDriverDialog)
+    let addDriverDialogRef = this.dialog.open(AddDriverDialog);
+    addDriverDialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.add(res[0], res[1])
+      }
+    });
   }
 }
 
