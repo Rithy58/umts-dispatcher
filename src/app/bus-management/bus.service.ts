@@ -30,4 +30,11 @@ export class BusService {
     })
     return observable;
   }
+
+  addBus(busId:string,busType:string){
+    this.socket.emit('addBus',{
+      busID: busId,
+      Type: busType
+    });
+  }
 }

@@ -1,3 +1,4 @@
+<h2>Drivers</h2>
 <div>
   <label>Name:</label> <input #driverName />
   <label>Phone number:</label> <input #driverPhone />
@@ -5,6 +6,7 @@
     Add
   </button>
 </div>
+<button md-raised-button (click)="openAddDriverDialog()">Add Driver</button>
 <div class="grid grid-pad">
   <a *ngFor="let driver of drivers"  class="col-1-4">
     <div class="module hero">
