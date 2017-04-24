@@ -4,18 +4,18 @@
       <table class="example-full-width" cellspacing="0">
         <tr>
           <td><md-input-container>
-            <input type='date' mdInput placeholder="Start Date" #startDate>
+            <input type='date' (blur)="newStartDate(startDate.value)" mdInput placeholder="Start Date" #startDate>
           </md-input-container></td>
           <td><md-input-container>
-            <input type='time' mdInput placeholder="Start Time" #startTime>
+            <input type='time' (blur)="newStartTime(startTime.value)"mdInput placeholder="Start Time" #startTime>
           </md-input-container></td>
         </tr>
         <tr>
           <td><md-input-container>
-            <input type='date' mdInput placeholder="End Date" #endDate>
+            <input type='date' (blur)="newEndDate(endDate.value)" mdInput placeholder="End Date" #endDate>
           </md-input-container></td>
           <td><md-input-container>
-            <input type='time' mdInput placeholder="End Time" #endTime>
+            <input type='time' (blur)="newEndTime(endTime.value)"mdInput placeholder="End Time" #endTime>
           </md-input-container></td>
         </tr>
         <tr>
@@ -30,9 +30,15 @@
           <td><md-input-container>
             <input type="number" mdInput placeholder="Route Number" #route>
           </md-input-container></td>
-          <td><md-input-container>
-            <input mdInput placeholder="Driver ID" #driverID>
-          </md-input-container></td>
+        </tr>
+        <tr>
+          <td><md-select placeholder="Driver" [(ngModel)]="selectedDriver" name="driver">
+            <md-option *ngFor="let driver of drivers" [value]="driver.id">
+              {{driver.name}}
+            </md-option>
+          </md-select></td>
+        </tr>
+        <tr>
           <td><md-input-container>
             <input mdInput placeholder="Bus ID" #busID>
           </md-input-container></td>
@@ -41,5 +47,5 @@
   </form>
 </div>
 <div md-dialog-actions>
-  <button md-button (click)="dialogRef.close([startDate.value, startTime.value, endDate.value, endTime.value, startLoc.value, endLoc.value, route.value, driverID.value, busID.value])">Save</button>
+  <button md-button (click)="dialogRef.close([startDate.value, startTime.value, endDate.value, endTime.value, startLoc.value, endLoc.value, route.value, this.selectedDriver, busID.value])">Save</button>
 </div>
