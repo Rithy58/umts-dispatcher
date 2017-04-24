@@ -3,7 +3,7 @@ import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdSidenavModule, MdListModule,
-  MdToolbarModule, MdIconModule } from '@angular/material';
+  MdToolbarModule, MdIconModule, MdInputModule } from '@angular/material';
 
 import { AppComponent }         from './app.component';
 import { SidenavComponent }       from './sidenav/sidenav.component';
@@ -27,7 +27,8 @@ import { AppRoutingModule }     from './app-routing.module';
     MdSidenavModule,
     MdListModule,
     MdToolbarModule,
-    MdIconModule
+    MdIconModule,
+    MdInputModule,
   ],
   declarations: [
     AppComponent,
