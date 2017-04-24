@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+import { MdDialog } from '@angular/material';
+
 import { Driver } from './driver';
 import { DriverService } from './driver.service';
+
 
 @Component({
   selector: 'driver-management',
@@ -16,11 +19,16 @@ export class DriverManagementComponent implements OnInit {
   // Listener for all drivers
   getDriversConnection;
 
-  constructor(private DriverService: DriverService) { }
+  constructor(private DriverService: DriverService, private dialog: MdDialog) { }
+
+  add(name: string, phone: string): void {
+    this.DriverService.addDriver(name, phone);
+  }
 
   ngOnInit(): void {
-    this.DriverService.getAllDrivers;
-    this.getDriversConnection = this.DriverService.getAllDrivers()
+    this.DriverService.connect();
+    this.DriverService.getAllDrivers();
+    this.getDriversConnection = this.DriverService.getDrivers()
       .subscribe(array => {
         for (let i in array) {
           // create a Driver object in the front end for each driver JSON.
@@ -44,4 +52,21 @@ export class DriverManagementComponent implements OnInit {
   ngOnDestroy() {
     this.getDriversConnection.unsubscribe();
   }
+
+  openAddDriverDialog() {
+    let addDriverDialogRef = this.dialog.open(AddDriverDialog);
+    addDriverDialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.add(res[0], res[1])
+      }
+    });
+  }
 }
+
+
+@Component({
+  selector: 'driver-management-add-driver-dialog',
+  templateUrl: './driver-management-add-driver-dialog.component.html',
+  styleUrls: [ './driver-management-add-driver-dialog.component.css' ]
+})
+export class AddDriverDialog {}

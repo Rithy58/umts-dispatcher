@@ -1,3 +1,22 @@
+
+table {
+  min-width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  box-shadow: 0 2px 2px rgba(0,0,0,.24), 0 0 2px rgba(0,0,0,.12);
+}
+td {
+  text-align: center;
+  padding: 4px;
+  border: 1px solid rgba(0,0,0,.03);
+}
+th {
+  background: #f5f5f5;
+  padding: 12px 16px;
+}
+
+
+
 [class*='col-'] {
   float: left;
   padding-right: 20px;
@@ -27,10 +46,10 @@ h4 {
   width: 25%;
 }
 .module {
-  padding: 20px;
+  padding: 5px;
   text-align: center;
   color: #eee;
-  max-height: 120px;
+  max-height: 150px;
   min-width: 120px;
   background-color: #607D8B;
   border-radius: 2px;

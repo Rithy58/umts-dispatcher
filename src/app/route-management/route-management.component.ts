@@ -18,9 +18,15 @@ export class RouteManagementComponent implements OnInit {
 
   constructor(private RouteService: RouteService) { }
 
+  add(routeID: number, validBusTypes: string): void {
+    
+    this.RouteService.addRoute(routeID, validBusTypes);
+  }
+
   ngOnInit(): void {
+    this.RouteService.connect();
     this.RouteService.getAllRoutes();
-    this.getRoutesConnection = this.RouteService.getAllRoutes()
+    this.getRoutesConnection = this.RouteService.getRoutes()
       .subscribe(array => {
         for (let i in array) {
           // create a route object in the front end for each route JSON.
@@ -28,14 +34,14 @@ export class RouteManagementComponent implements OnInit {
           let inRouteArr = false;
           // If this route is already in the array, just update the data.
           this.routes.forEach(function(s) {
-            if (s.id === route.id) {
+            if (s.routeID === route.number) {
               inRouteArr = true;
-              s.updateData(route.number, route.valid_bus_types);
+              s.updateData(route.valid_bus_types);
             }
           });
           // Insert if we didnt find it.
           if (inRouteArr === false) {
-            this.routes.push(new Route(route.id, route.number, route.valid_bus_types));
+            this.routes.push(new Route(route.number, route.valid_bus_types));
           }
         }
       })

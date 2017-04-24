@@ -6,8 +6,23 @@ import * as io from 'socket.io-client';
 
 @Injectable()
 export class ShiftService {
-  private url = "http://localhost:8080";
-  private socket = io(this.url);
+  private socket;
+
+  connect() {
+    this.socket = io();
+  }
+
+  addShift(startTime, endTime, startLoc, endLoc, route, driverID, busID): void {
+    this.socket.emit('addShift', {
+      startTime: startTime,
+      endTime: endTime,
+      startLoc: startLoc,
+      endLoc: endLoc,
+      route: route,
+      driverID: driverID,
+      busID: busID
+    });
+  }
 
   getShiftByDay(date) {
     this.socket.emit('getShiftByDay', date);

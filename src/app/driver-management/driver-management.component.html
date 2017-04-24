@@ -1,10 +1,19 @@
+<h2>Drivers</h2>
+<div>
+  <label>Name:</label> <input #driverName />
+  <label>Phone number:</label> <input #driverPhone />
+  <button (click)="add(driverName.value, driverPhone.value); driverName.value=''; driverPhone.value=''">
+    Add
+  </button>
+</div>
+<button md-raised-button (click)="openAddDriverDialog()">Add Driver</button>
 <div class="grid grid-pad">
   <a *ngFor="let driver of drivers"  class="col-1-4">
     <div class="module hero">
       <p>ID: {{driver.id}}</p>
       <p>Name: {{driver.name}}</p>
-      <p>Phone: {{driver.phone}}</p>
-      <p>Late Count: {{driver.late_count}}</p>
+      <p>Phone: {{driver.phoneNumber}}</p>
+      <p>Late Count: {{driver.numLateShifts}}</p>
     </div>
   </a>
 </div>

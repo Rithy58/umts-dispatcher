@@ -1,0 +1,20 @@
+<h1 md-dialog-title>Bus</h1>
+<div md-dialog-content>
+  <form class="new-bus-form">
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td><md-input-container>
+            <input mdInput placeholder="Bus ID" #busID>
+          </md-input-container></td>
+        </tr>
+        <tr>
+          <td><md-input-container>
+            <input mdInput placeholder="Type" #busType>
+          </md-input-container></td>
+        </tr>
+      </table>
+  </form>
+</div>
+<div md-dialog-actions>
+  <button md-button (click)="dialogRef.close([busID.value,busType.value])">Save</button>
+</div>

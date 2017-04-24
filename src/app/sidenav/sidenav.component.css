@@ -1,0 +1,17 @@
+md-sidenav-container, .my-content {
+  margin: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.sidenav {
+  width: 250px;
+}
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.my-content {
+  padding: 20px;
+}

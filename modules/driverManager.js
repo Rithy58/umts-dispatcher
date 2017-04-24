@@ -6,7 +6,7 @@ module.exports = {
   },
 
   getAllDrivers: function(){
-    QUERY = "SELECT * From driver";
+    QUERY = "SELECT * FROM driver";
     return db.query(QUERY);
   },
 
