@@ -13,6 +13,7 @@ export class ShiftManagementComponent implements OnInit {
 
   // Clients local Shift[] array for displaying
   shifts: Shift[] = [];
+  date = new Date(2017,3,17,0,0,0,0);
 
   // Listener for all shifts
   getShiftsConnection;
@@ -31,7 +32,7 @@ export class ShiftManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.ShiftService.connect();
-    this.ShiftService.getShiftByDay(new Date(2017,3,17,0,0,0,0));
+    this.ShiftService.getShiftByDay(this.date);
     this.getShiftsConnection = this.ShiftService.getShifts()
       .subscribe(array => {
         for (let i in array) {

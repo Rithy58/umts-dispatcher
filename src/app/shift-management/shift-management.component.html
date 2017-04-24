@@ -1,9 +1,36 @@
-<div class="grid grid-pad">
-  <a *ngFor="let shift of shifts"  class="col-1-4">
-    <div class="module hero">
-      <p>Route {{shift.route}}</p>
-      <p>Start Time {{shift.startTime}}</p>
-    </div>
-  </a>
-  <button md-button (click)="openDialog()">Create New</button>
-</div>
+<h2>Shift Management - {{date | date: 'longDate'}}</h2>
+<md-tab-group>
+  <md-tab label="Route 30">
+    <table cellspacing="10">
+      <thead>
+        <tr>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Start Location</th>
+          <th>End Location</th>
+          <th>Driver</th>
+          <th>Bus</th>
+          <th></th>
+        </tr>
+      </thead>
+      <ng-container *ngFor="let shift of shifts">
+        <tr *ngIf="shift.route == 30">
+          <td>{{shift.startTime | date: 'short'}}</td>
+          <td>{{shift.endTime | date: 'short'}}</td>
+          <td>{{shift.startLocation}}</td>
+          <td>{{shift.endLocation}}</td>
+          <td>{{shift.driverID}}</td>
+          <td>{{shift.busID}}</td>
+        </tr>
+      </ng-container>
+
+
+    </table>
+
+  </md-tab>
+  <md-tab label="Two">
+    <h1>Some more tab content</h1>
+    <p>...</p>
+  </md-tab>
+</md-tab-group>
+<button md-button (click)="openDialog()">Create New</button>
