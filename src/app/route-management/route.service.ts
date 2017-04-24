@@ -13,6 +13,14 @@ export class RouteService {
     this.socket = io(this.url);
   }
 
+  addRoute(routeID: number, validBusTypes: string) {
+    this.socket.emit('addRoute', {
+      routeID: routeID,
+      validBusTypes: validBusTypes
+    });
+  }
+
+
   getAllRoutes(){
     this.socket.emit('getAllRoutes');
   }
