@@ -12,6 +12,7 @@ export class Route {
       this.number = number;
       this.validBusType = validBusType;
   }
+  
 
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MdDialog} from '@angular/material';
 
 import { Bus } from './bus';
 import { BusService } from './bus.service';
@@ -8,6 +9,11 @@ import { BusService } from './bus.service';
   templateUrl: './bus-management.component.html',
   styleUrls: [ './bus-management.component.css' ]
 })
+
+
+
+
+
 export class BusManagementComponent implements OnInit {
 
   // Clients local Bus[] array for displaying
@@ -17,6 +23,14 @@ export class BusManagementComponent implements OnInit {
   getBusConnection;
 
   constructor(private BusService: BusService) { }
+
+
+
+  add(id: string, type: string): void{
+    this.BusService.addBus(id, type);
+  }
+
+  
 
   ngOnInit(): void {
     this.BusService.connect();
@@ -46,3 +60,7 @@ export class BusManagementComponent implements OnInit {
     this.getBusConnection.unsubscribe();
   }
 }
+
+
+
+export class AddBusDialog{ }
