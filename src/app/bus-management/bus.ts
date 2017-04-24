@@ -1,4 +1,4 @@
-export class Shift {
+export class Bus {
   id: string;
   type: string;
   defects: string;
@@ -9,8 +9,7 @@ export class Shift {
       this.defects = defects;
     }
 
-  updateData(id: string, type: string, defects: string) {
-      this.id = id;
+  updateData(type: string, defects: string) {
       this.type = type;
       this.defects = defects;
   }

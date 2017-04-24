@@ -99,4 +99,22 @@ describe('routeManager', function(){
 		});
 	});
 
+	describe('#getAllDetours()', function() {
+		//Insert 3 entries into the database
+		before(function() {
+			db.query("DELETE FROM detour;");
+			var queryStr = "INSERT INTO detour (path, is_active) VALUES ";
+			queryStr += "('north', true), ('north', false), ('east', true);";
+			return db.query(queryStr);
+		});
+
+		it('should get all detours', function() {
+			return route.getAllDetours()
+			.then(function(res) {
+				assert(res.rowCount == 3, 'Result should contain 3 detours.');
+			});
+		});
+	});
+
+
 });

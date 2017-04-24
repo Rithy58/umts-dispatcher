@@ -1,23 +1,27 @@
-import { Shift } from './shift';
+import { Bus } from './bus';
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 
 
 @Injectable()
-export class ShiftService {
+export class BusService {
   private url = "http://localhost:8080";
-  private socket = io(this.url);
+  private socket;
 
-  getShiftByDay(date) {
-    this.socket.emit('getShiftByDay', date);
+  connect() {
+    this.socket = io(this.url);
   }
 
-  // This will always load the shifts that have been requested.
+  getTheBuses() {
+    this.socket.emit('getAllBuses');
+  }
+
+  // This will always load the buses that have been requested.
   // For this data to be updated, a message needs to be sent to the socket
-  getShifts() {
+  getAllBuses() {
     let observable = new Observable(observer => {
-      this.socket.on('update shifts', (data) => {
+      this.socket.on('update buses', (data) => {
         observer.next(data);
       });
       return () => {

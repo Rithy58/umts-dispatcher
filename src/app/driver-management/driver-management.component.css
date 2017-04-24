@@ -27,10 +27,10 @@ h4 {
   width: 25%;
 }
 .module {
-  padding: 20px;
+  padding: 5px;
   text-align: center;
   color: #eee;
-  max-height: 120px;
+  max-height: 200px;
   min-width: 120px;
   background-color: #607D8B;
   border-radius: 2px;
@@ -41,7 +41,7 @@ h4 {
   color: #607d8b;
 }
 .grid-pad {
-  padding: 10px 0;
+  padding: 40px 0;
 }
 .grid-pad > [class*='col-']:last-of-type {
   padding-right: 20px;
