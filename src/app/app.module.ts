@@ -26,7 +26,7 @@ import { AppRoutingModule }     from './app-routing.module';
     FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule.forRoot()
   ],
   declarations: [
     AppComponent,
