@@ -62,7 +62,7 @@ describe('shiftManager', function(){
 
   describe('#setStartTime()', function() {
 		it('should change the start time of a shift', function() {
-      time = new Date(2017,3,1,8,0,0,0);
+      time = '2017-04-01T08:00:00.000Z';
       return shift.setStartTime(1, time)
       .then(function(res) {
         var res_start_time = res.rows[0].start_time;
@@ -73,7 +73,7 @@ describe('shiftManager', function(){
 
   describe('#setEndTime()', function() {
 		it('should change the end time of a shift', function() {
-      time = new Date(2017,3,1,8,0,0,0);
+      time = '2017-04-01T08:00:00.000Z';
       return shift.setEndTime(1, time)
       .then(function(res) {
         var res_end_time = res.rows[0].end_time;
@@ -188,8 +188,8 @@ describe('shiftManager', function(){
     });
 
     it('should add the shift', function() {
-      var start = new Date(2017, 3, 1, 8, 0, 0, 0);
-      var end = new Date(2017, 3, 1, 10, 0, 0, 0);
+      var start = '2017-04-01T08:00:00.000Z';
+      var end = '2017-04-01T10:00:00.000Z';
       return shift.addShift(start, end, 'Campus Center', 'CS Building', '12', '123', '1')
         .then(function(res) {
           var actual = res.rows[0];
