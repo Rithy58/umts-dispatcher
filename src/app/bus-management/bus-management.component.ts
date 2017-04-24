@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MdDialog, MdDialogRef} from '@angular/material';
 
 import { Bus } from './bus';
 import { BusService } from './bus.service';
@@ -13,10 +14,21 @@ export class BusManagementComponent implements OnInit {
   // Clients local Bus[] array for displaying
   buses: Bus[] = [];
 
+
   // Listener for all buses
   getBusConnection;
 
-  constructor(private BusService: BusService) { }
+
+
+  constructor(private BusService: BusService, public dialog: MdDialog) { }
+
+
+
+  addBus(id: string, type: string): void{
+    this.BusService.addBus(id, type);
+  }
+
+
 
   ngOnInit(): void {
     this.BusService.connect();
@@ -45,4 +57,20 @@ export class BusManagementComponent implements OnInit {
   ngOnDestroy() {
     this.getBusConnection.unsubscribe();
   }
+
+  openDialog() {
+    let dialogRef = this.dialog.open(AddBusDialog);
+    dialogRef.afterClosed().subscribe(res=>{
+      this.addBus(res[0],res[1]);
+    });
+
+  }
+}
+
+@Component({
+  selector: 'add-bus-popup',
+  templateUrl: './add-bus-popup.html'
+})
+export class AddBusDialog{
+  constructor(public dialogRef: MdDialogRef<AddBusDialog>){}
 }

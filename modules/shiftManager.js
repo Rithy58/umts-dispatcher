@@ -22,15 +22,13 @@ module.exports = {
     return db.query(query, args);
   },
   setStartTime: function(shiftID, time) {
-    query = "UPDATE shift SET start_time=make_timestamptz($2,$3,$4,$5,$6,0) WHERE id=$1 RETURNING *;";
-    args = [shiftID, time.getFullYear(), time.getMonth() + 1,
-       time.getDate(), time.getHours(), time.getMinutes()];
+    query = "UPDATE shift SET start_time=$2 WHERE id=$1 RETURNING *;";
+    args = [shiftID, time];
     return db.query(query, args);
   },
   setEndTime: function(shiftID, time) {
-    query = "UPDATE shift SET end_time=make_timestamptz($2,$3,$4,$5,$6,0) WHERE id=$1 RETURNING *;";
-    args = [shiftID, time.getFullYear(), time.getMonth() + 1,
-       time.getDate(), time.getHours(), time.getMinutes()];
+    query = "UPDATE shift SET end_time=$2 WHERE id=$1 RETURNING *;";
+    args = [shiftID, time];
     return db.query(query, args);
   },
   setDriver: function(shiftID, driverID) {
@@ -65,19 +63,9 @@ module.exports = {
     return db.query(query,[incidentID,incidentStr]);
   },
   addShift: function(startTime, endTime, startLoc, endLoc, driverID, busID, route) {
-    query = "INSERT INTO shift (start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES (make_timestamptz($1,$2,$3,$4,$5,0),make_timestamptz($6,$7,$8,$9,$10,0),$11,$12,$13,$14,$15) RETURNING *";
-    var args = [startTime.getFullYear(),
-    startTime.getMonth() + 1,
-    startTime.getDate(),
-    startTime.getHours(),
-    startTime.getMinutes(),
-
-    endTime.getFullYear(),
-    endTime.getMonth() + 1,
-    endTime.getDate(),
-    endTime.getHours(),
-    endTime.getMinutes(),
-
+    query = "INSERT INTO shift (start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *";
+    var args = [startTime,
+    endTime,
     startLoc,
     endLoc,
     driverID,
@@ -88,20 +76,10 @@ module.exports = {
   driversAvailable: function(startTime, endTime) {
     query = "SELECT driver.id, driver.name FROM driver WHERE driver.id NOT IN \
     (SELECT driver_id FROM shift WHERE \
-      (start_time <= make_timestamptz($1, $2, $3, $4, $5, 0) AND make_timestamptz($1, $2, $3, $4, $5, 0) < end_time) OR \
-      (start_time < make_timestamptz($6, $7, $8, $9, $10, 0) AND make_timestamptz($6, $7, $8, $9, $10, 0) <= end_time) OR \
-      (make_timestamptz($1, $2, $3, $4, $5, 0) <= start_time AND end_time <= make_timestamptz($6, $7, $8, $9, $10, 0)));";
-      args = [startTime.getFullYear(),
-      startTime.getMonth() + 1,
-      startTime.getDate(),
-      startTime.getHours(),
-      startTime.getMinutes(),
-      endTime.getFullYear(),
-      endTime.getMonth() + 1,
-      endTime.getDate(),
-      endTime.getHours(),
-      endTime.getMinutes()
-      ]
+      (start_time <= $1 AND $1 < end_time) OR \
+      (start_time < $2 AND $2 <= end_time) OR \
+      ($1 <= start_time AND end_time <= $2));";
+      args = [startTime, endTime]
     return db.query(query, args);
   },
 };
