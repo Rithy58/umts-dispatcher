@@ -28,11 +28,28 @@ export class ShiftService {
     this.socket.emit('getShiftByDay', date);
   }
 
+  getDriversAvailable(start, end) {
+    this.socket.emit('driversAvailable', {startTime: start, endTime: end});
+  }
+
   // This will always load the shifts that have been requested.
   // For this data to be updated, a message needs to be sent to the socket
   getShifts() {
     let observable = new Observable(observer => {
       this.socket.on('update shifts', (data) => {
+        observer.next(data);
+      });
+      return () => {
+        this.socket.disconnect();
+      };
+    })
+    return observable;
+  }
+
+  // Observer for updating list of drivers as dates change in form
+  getDrivers() {
+    let observable = new Observable(observer => {
+      this.socket.on('update available drivers', (data) => {
         observer.next(data);
       });
       return () => {

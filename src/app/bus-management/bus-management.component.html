@@ -1,9 +1,18 @@
-<div class="grid grid-pad">
-  <a *ngFor="let bus of buses"  class="col-1-4">
-    <div class="module hero">
-      <p>ID: {{bus.id}}</p>
-      <p>Type: {{bus.type}}</p>
-      <p>Defects: {{bus.defects}}</p>
-    </div>
-  </a>
-</div>
+<button md-raised-button (click)="openDialog()">Create New</button>
+
+<table>
+  <thead>
+    <tr>
+      <th>Bus ID</th>
+      <th>Bus Type</th>
+      <th>Defects</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tr *ngFor="let bus of buses">
+    <td>{{bus.id}}</td>
+    <td>{{bus.type}}</td>
+    <td>{{bus.defects}}</td>
+    <td><button md-button><md-icon md-list-icon>mode_edit</md-icon></button></td>
+  </tr>
+</table>
