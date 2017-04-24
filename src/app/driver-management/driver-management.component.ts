@@ -25,6 +25,10 @@ export class DriverManagementComponent implements OnInit {
     this.DriverService.addDriver(name, phone);
   }
 
+  deleteDriver(id: number): void {
+    this.DriverService.deleteDriver(id);
+  }
+
   ngOnInit(): void {
     this.DriverService.connect();
     this.DriverService.getAllDrivers();
@@ -63,6 +67,14 @@ export class DriverManagementComponent implements OnInit {
   }
 }
 
+deleteDialogue(){
+    let dialogRef = this.dialog.open(deleteDriverDialog);
+    dialogRef.afterClosed().subscribe(res => {
+      if(res) {
+        this.addDriver(res[0],res[1]);
+      }
+  });
+}
 
 @Component({
   selector: 'driver-management-add-driver-dialog',
