@@ -16,6 +16,7 @@ import { BusService }     from './bus-management/bus.service';
 import { RouteService }          from './route-management/route.service';
 import { DriverService }          from './driver-management/driver.service';
 import { AddDriverDialog }          from './driver-management/driver-management.component';
+import { AddBusDialog }         from './bus-management/bus-management.component';
 
 import { AppRoutingModule }     from './app-routing.module';
 
@@ -36,8 +37,10 @@ import { AppRoutingModule }     from './app-routing.module';
     DriverManagementComponent,
     RouteManagementComponent,
     AddDriverDialog,
+    AddBusDialog
   ],
-  entryComponents: [ShiftManagementCreateNewDialog, AddDriverDialog],
+
+  entryComponents: [ShiftManagementCreateNewDialog, AddDriverDialog,AddBusDialog],
   providers: [ ShiftService, BusService, RouteService, DriverService ],
   bootstrap: [ AppComponent ]
 })

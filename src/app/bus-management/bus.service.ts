@@ -6,10 +6,11 @@ import * as io from 'socket.io-client';
 
 @Injectable()
 export class BusService {
+  private url = "http://localhost:8080";
   private socket;
 
   connect() {
-    this.socket = io();
+    this.socket = io(this.url);
   }
 
   getTheBuses() {
@@ -28,5 +29,12 @@ export class BusService {
       };
     })
     return observable;
+  }
+
+  addBus(busId:string,busType:string){
+    this.socket.emit('addBus',{
+      busID: busId,
+      Type: busType
+    });
   }
 }
