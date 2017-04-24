@@ -1,0 +1,45 @@
+<h1 md-dialog-title>Create New Shift</h1>
+<div md-dialog-content>
+  <form class="new-shift-form">
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td><md-input-container>
+            <input type='date' mdInput placeholder="Start Date" #startDate>
+          </md-input-container></td>
+          <td><md-input-container>
+            <input type='time' mdInput placeholder="Start Time" #startTime>
+          </md-input-container></td>
+        </tr>
+        <tr>
+          <td><md-input-container>
+            <input type='date' mdInput placeholder="End Date" #endDate>
+          </md-input-container></td>
+          <td><md-input-container>
+            <input type='time' mdInput placeholder="End Time" #endTime>
+          </md-input-container></td>
+        </tr>
+        <tr>
+          <td><md-input-container>
+            <input mdInput placeholder="Start Location" #startLoc>
+          </md-input-container></td>
+          <td><md-input-container>
+            <input mdInput placeholder="End Location" #endLoc>
+          </md-input-container></td>
+        </tr>
+        <tr>
+          <td><md-input-container>
+            <input mdInput placeholder="Route Number" #route>
+          </md-input-container></td>
+          <td><md-input-container>
+            <input mdInput placeholder="Driver ID" #driverID>
+          </md-input-container></td>
+          <td><md-input-container>
+            <input mdInput placeholder="Bus ID" #busID>
+          </md-input-container></td>
+        </tr>
+      </table>
+  </form>
+</div>
+<div md-dialog-actions>
+  <button md-button (click)="dialogRef.close([startDate.value, startTime.value, endDate.value, endTime.value, startLoc.value, endLoc.value, route.value, driverID.value, busID.value])">Save</button>
+</div>
