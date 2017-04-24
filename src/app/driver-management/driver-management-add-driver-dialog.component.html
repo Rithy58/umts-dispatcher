@@ -1,3 +1,4 @@
+<h1 md-dialog-title>Add Driver</h1>
 <form class="DriverManagementComponent">
   <table>
     <tr>
@@ -11,7 +12,7 @@
       </md-input-container>
     </tr>
     <tr>
-      <button md-button (click)="add(driverName.value, driverPhone.value); driverName.value=''; driverPhone.value=''">Add</button>
+      <button md-button (click)="addDriverDialogRef.close([driverName.value, driverPhone.value])">Add</button>
     </tr>
   </table>
 </form>
