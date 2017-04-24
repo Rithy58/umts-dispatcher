@@ -6,11 +6,10 @@ import * as io from 'socket.io-client';
 
 @Injectable()
 export class ShiftService {
-  private url = "http://localhost:8080";
   private socket;
 
   connect() {
-    this.socket = io(this.url);
+    this.socket = io();
   }
 
   addShift(startTime, endTime, startLoc, endLoc, route, driverID, busID): void {
