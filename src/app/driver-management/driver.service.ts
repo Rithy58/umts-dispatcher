@@ -21,9 +21,7 @@ export class DriverService {
   }
 
   deleteDriver(id: number) {
-    this.socket.emit('deleteDriver', {
-      driverID: id,
-    });
+    this.socket.emit('deleteDriver', id);
   }
 
 

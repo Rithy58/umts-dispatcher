@@ -88,7 +88,7 @@ export class AddDriverDialog {
 @Component({
   selector: 'driver-management-delete-driver-dialog',
   templateUrl: './driver-management-delete-driver-dialog.component.html',
-  styleUrls: [ './driver-management-add-driver-dialog.component.css' ]
+  styleUrls: [ './driver-management-delete-driver-dialog.component.css' ]
 })
 export class DeleteDriverDialog {
   constructor(public dialogRef: MdDialogRef<DeleteDriverDialog>) {}
