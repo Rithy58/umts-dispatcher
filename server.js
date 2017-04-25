@@ -23,8 +23,12 @@ io.on('connection', function(socket) {
 
   // Request all shifts that occured on a given @date
   socket.on('getShiftByDay', function(date) {
-    console.log(date);
-    shift.getShiftByDay(new Date(date))
+    // If its a date without a time (html datepicker)
+    // add a timezone for the database.
+    if(date.length != 24) {
+      date = date + "T12:00:00.000Z";
+    }
+    shift.getShiftByDay(date)
     .then(function(res) {
       socket.emit('update shifts', res.rows);
     })

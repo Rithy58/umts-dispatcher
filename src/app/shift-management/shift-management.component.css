@@ -6,6 +6,9 @@
 .container {
   padding: 20px 2px;
 }
+h2 {
+  display: inline;
+}
 table {
   min-width: 100%;
   border-collapse: collapse;

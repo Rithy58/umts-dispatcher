@@ -1,5 +1,9 @@
-<h2>Shift Management - {{date | date: 'longDate'}}</h2>
-<button md-raised-button (click)="openDialog()">Create New</button>
+<div layout="row" flex>
+    <h2>Shift Management - </h2>
+    <md-input-container flex>
+      <input type='date' (change)="changeDate(newDate.value)" mdInput placeholder="" #newDate>
+    </md-input-container>
+</div>
 <md-tab-group>
   <md-tab label="Route 30">
     <div class="container">
@@ -35,3 +39,4 @@
     <p>...</p>
   </md-tab>
 </md-tab-group>
+<button md-raised-button (click)="openDialog()" color="primary">Create New</button>
