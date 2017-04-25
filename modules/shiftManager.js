@@ -12,6 +12,9 @@ module.exports = {
     if(!date) {  // If no date is passed, return todays info
       date = new Date();
     }
+    else if (typeof date === 'string') {
+      date = new Date(date);
+    }
     query = "SELECT * FROM shift WHERE date_trunc('day', start_time) = make_timestamptz($1,$2,$3,0,0,0)";
     args = [date.getFullYear(), date.getMonth() + 1, date.getDate()];
     return db.query(query, args);
