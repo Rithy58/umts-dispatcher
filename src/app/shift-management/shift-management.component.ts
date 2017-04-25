@@ -13,7 +13,7 @@ export class ShiftManagementComponent implements OnInit {
 
   // Clients local Shift[] array for displaying
   shifts: Shift[] = [];
-  date = new Date(2017,3,17,0,0,0,0);
+  date = new Date();
 
   // Listener for all shifts
   getShiftsConnection;
@@ -21,6 +21,12 @@ export class ShiftManagementComponent implements OnInit {
   selectedOption: string;
 
   constructor(private ShiftService: ShiftService, public dialog: MdDialog) { }
+
+  changeDate(newDate) {
+    this.date = newDate;
+    this.shifts = [];
+    this.ShiftService.getShiftByDay(this.date);
+  }
 
   addShift(startDate, startTime, endDate, endTime,
     startLoc, endLoc, route, driverID, busID): void {

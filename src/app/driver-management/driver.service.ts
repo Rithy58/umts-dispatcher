@@ -20,6 +20,11 @@ export class DriverService {
     });
   }
 
+  deleteDriver(id: number) {
+    this.socket.emit('deleteDriver', id);
+  }
+
+
   getAllDrivers(){
     this.socket.emit('getAllDrivers');
   }
