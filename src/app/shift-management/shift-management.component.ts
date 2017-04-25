@@ -13,7 +13,7 @@ export class ShiftManagementComponent implements OnInit {
 
   // Clients local Shift[] array for displaying
   shifts: Shift[] = [];
-  date = new Date();
+  date = new Date().toISOString();
 
   // Listener for all shifts
   getShiftsConnection;
@@ -23,7 +23,7 @@ export class ShiftManagementComponent implements OnInit {
   constructor(private ShiftService: ShiftService, public dialog: MdDialog) { }
 
   changeDate(newDate) {
-    this.date = newDate;
+    this.date = newDate + "T12:00:00.000Z";
     this.shifts = [];
     this.ShiftService.getShiftByDay(this.date);
   }
@@ -53,11 +53,16 @@ export class ShiftManagementComponent implements OnInit {
                 shift.route, shift.driver_id, shift.bus_id);
             }
           });
-          // Insert if we didnt find it.
-          if (inShiftArr === false) {
-            this.shifts.push(new Shift(shift.id, shift.start_time,
-              shift.end_time, shift.start_location, shift.end_location,
-              shift.route, shift.driver_id, shift.bus_id));
+          var currDateStr = new Date(shift.start_time).toLocaleDateString();
+          var shiftDateStr = new Date(this.date).toLocaleDateString()
+
+          // Insert if we didnt find it and its for the proper Date.
+          if (inShiftArr === false && currDateStr === shiftDateStr) {
+
+              this.shifts.push(new Shift(shift.id, shift.start_time,
+                shift.end_time, shift.start_location, shift.end_location,
+                shift.route, shift.driver_id, shift.bus_id));
+
           }
         }
       })
