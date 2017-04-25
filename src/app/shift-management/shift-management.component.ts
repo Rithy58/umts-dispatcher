@@ -54,7 +54,7 @@ export class ShiftManagementComponent implements OnInit {
             }
           });
           var currDateStr = new Date(shift.start_time).toLocaleDateString();
-          var shiftDateStr = new Date(this.date).toLocaleDateString()
+          var shiftDateStr = new Date(this.date).toLocaleDateString();
 
           // Insert if we didnt find it and its for the proper Date.
           if (inShiftArr === false && currDateStr === shiftDateStr) {
