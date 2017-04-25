@@ -66,7 +66,7 @@ export class DriverManagementComponent implements OnInit {
     });
   }
 
-  deleteDialogue(id: number){
+  deleteDialog(id: number){
     let dialogRef = this.dialog.open(DeleteDriverDialog);
     dialogRef.afterClosed().subscribe(res => {
       if(res == 'yes') {
