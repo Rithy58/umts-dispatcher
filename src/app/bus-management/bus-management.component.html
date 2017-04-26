@@ -1,4 +1,4 @@
-<button md-raised-button (click)="openDialog()" class='AddBusBtn'>Add New Bus</button>
+<button md-raised-button (click)="openDialog()" class="AddBusBtn">Add New Bus</button>
 
 <table>
   <thead>
@@ -9,10 +9,13 @@
       <th></th>
     </tr>
   </thead>
-  <tr *ngFor="let bus of buses">
-    <td>{{bus.id}}</td>
-    <td>{{bus.type}}</td>
-    <td>{{bus.defects}}</td>
-    <td><button md-button><md-icon md-list-icon>mode_edit</md-icon></button></td>
-  </tr>
+  <ng-container *ngFor="let bus of buses">
+    <tr>
+      <td>{{bus.id}}</td>
+      <td>{{bus.type}}</td>
+      <td>{{bus.defects}}</td>
+      <td><button md-button><md-icon md-list-icon>mode_edit</md-icon></button></td>
+      <td><button md-button (click)="deleteDialog(bus.id)"><md-icon md-list-icon>delete</md-icon></button></td>
+    </tr>
+  </ng-container>
 </table>

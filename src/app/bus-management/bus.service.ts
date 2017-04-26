@@ -16,6 +16,10 @@ export class BusService {
     this.socket.emit('getAllBuses');
   }
 
+  removeBus(id: string) {
+    this.socket.emit('removeBus', id);
+  }
+
   // This will always load the buses that have been requested.
   // For this data to be updated, a message needs to be sent to the socket
   getAllBuses() {
