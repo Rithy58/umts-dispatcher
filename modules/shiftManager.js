@@ -76,6 +76,18 @@ module.exports = {
     route];
     return db.query(query, args);
   },
+  editShift: function(shiftID, startTime, endTime, startLoc, endLoc, driverID, busID, route) {
+    query = "UPDATE shifts SET start_time=$2, end_time=$3, start_location=$4, end_location=$5, driver_id=$6, bus_id=$7, route=$8 WHERE id=$1";
+    var args = [shiftID,
+    startTime,
+    endTime,
+    startLoc,
+    endLoc,
+    driverID,
+    busID,
+    route];
+    return db.query(query, args);
+  },
   driversAvailable: function(startTime, endTime) {
     query = "SELECT driver.id, driver.name FROM driver WHERE driver.id NOT IN \
     (SELECT driver_id FROM shift WHERE \
