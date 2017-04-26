@@ -1,0 +1,51 @@
+<h1 md-dialog-title>Edit Shift</h1>
+<div md-dialog-content>
+  <form class="new-shift-form">
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td><md-input-container>
+            <input type='date' [(ngModel)]="shift.startDate" (blur)="newStartDate()" mdInput placeholder="Start Date" name="startDate">
+          </md-input-container></td>
+          <td><md-input-container>
+            <input type='time' [(ngModel)]="shift.startTime" (blur)="newStartTime()" mdInput placeholder="Start Time" name="startTime">
+          </md-input-container></td>
+        </tr>
+        <tr>
+          <td><md-input-container>
+            <input type='date' [(ngModel)]="shift.endDate" (blur)="newEndDate()" mdInput placeholder="End Date" name="endDate">
+          </md-input-container></td>
+          <td><md-input-container>
+            <input type='time' [(ngModel)]="shift.endTime" (blur)="newEndTime()" mdInput placeholder="End Time" name="endTime">
+          </md-input-container></td>
+        </tr>
+        <tr>
+          <td><md-input-container>
+            <input mdInput [(ngModel)]="shift.startLocation" placeholder="Start Location" name="startLoc">
+          </md-input-container></td>
+          <td><md-input-container>
+            <input mdInput [(ngModel)]="shift.endLocation" placeholder="End Location" name="endLoc">
+          </md-input-container></td>
+        </tr>
+        <tr>
+          <td><md-input-container>
+            <input type="number" [(ngModel)]="shift.route" mdInput placeholder="Route Number" name="route">
+          </md-input-container></td>
+        </tr>
+        <tr>
+          <td><md-select placeholder="Driver" [(ngModel)]="shift.driver[0]" (change)="updateDriverName(shift.driver[0])" name="driver">
+            <md-option *ngFor="let driver of drivers" [value]="driver.id">
+              {{driver.name}}
+            </md-option>
+          </md-select></td>
+        </tr>
+        <tr>
+          <td><md-input-container>
+            <input mdInput [(ngModel)]="shift.busID" placeholder="Bus ID" name="busID">
+          </md-input-container></td>
+        </tr>
+      </table>
+  </form>
+</div>
+<div md-dialog-actions>
+  <button md-button (click)="dialogRef.close(this.shift)">Save</button>
+</div>

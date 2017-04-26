@@ -24,6 +24,18 @@ export class ShiftService {
     });
   }
 
+  editShift(shift: Shift) {
+    this.socket.emit('editShift', {
+      // startTime: shift.startTime,
+      // endTime: shift.endTime,
+      // startLoc: shift.startLoc,
+      // endLoc: shift.endLoc,
+      // route: shift.route,
+      // driverID: shift.driver[0],
+      // busID: shift.busID
+    })
+  }
+
   getShiftByDay(date) {
     this.socket.emit('getShiftByDay', date);
   }

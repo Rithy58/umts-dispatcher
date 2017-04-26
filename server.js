@@ -166,6 +166,10 @@ io.on('connection', function(socket) {
     })
   });
 
+  socket.on('editShift', function(params) {
+    console.log('edit shift',params);
+  });
+
   // User gets list of available drivers
   // Send to specific client
   socket.on('driversAvailable', function(params) {
