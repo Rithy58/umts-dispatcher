@@ -17,20 +17,19 @@ export class EditShiftDialog implements OnInit {
     // Named this so they are not confused with the #startTime and #endTime
     // input fields in the template html
     getDriversConnection;
-    selectedDriver: string;
+    selectedDriver: number;
     drivers = [];
-
     // Data for driver select dropdown is binded to the ID
     // so we need to refetch the name from the list when
     // there is a change.
-    updateDriverName(driverID) {
+    updateDriver(driverID) {
       let driverName = "";
       this.drivers.forEach(function(driver) {
         if(driver.id == driverID) {
           driverName = driver.name;
         }
       });
-      this.shift.driver[1] = driverName;
+      this.shift.driverName = driverName;
     }
 
     newStartDate() {
@@ -58,12 +57,13 @@ export class EditShiftDialog implements OnInit {
     }
 
     ngOnInit() {
+      this.selectedDriver = this.shift.driverID;
       let start = this.shift.startDate + "T" + this.shift.startTime;
       let end = this.shift.endDate + "T" + this.shift.endTime;
       this.ShiftService.getDriversAvailable(start, end);
       this.getDriversConnection = this.ShiftService.getDrivers()
         .subscribe(array => {
-          this.drivers = [];
+          this.drivers = [{id: this.shift.driverID, name: this.shift.driverName}];
           for (let i in array) {
             this.drivers.push(array[i]);
           }

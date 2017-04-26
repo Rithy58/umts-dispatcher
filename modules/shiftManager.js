@@ -77,7 +77,7 @@ module.exports = {
     return db.query(query, args);
   },
   editShift: function(shiftID, startTime, endTime, startLoc, endLoc, driverID, busID, route) {
-    query = "UPDATE shift SET start_time=$2, end_time=$3, start_location=$4, end_location=$5, driver_id=$6, bus_id=$7, route=$8 WHERE id=$1 RETURNING *";
+    query = "UPDATE shift as s SET start_time=$2, end_time=$3, start_location=$4, end_location=$5, driver_id=$6, bus_id=$7, route=$8 FROM driver as d WHERE s.id=$1 AND d.id=$6 RETURNING s.id,s.start_time,s.end_time,s.start_location,s.end_location,s.driver_id,d.name as driver_name,s.bus_id,s.route";
     var args = [shiftID,
     startTime,
     endTime,
