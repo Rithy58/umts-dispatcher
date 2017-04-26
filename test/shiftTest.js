@@ -17,7 +17,7 @@ describe('shiftManager', function(){
     var insertShift = "INSERT INTO shift (start_time, end_time, start_location, \
       end_location, driver_id, bus_id, route) VALUES \
       (make_timestamptz(2017, 4, 17, 8, 0, 0), make_timestamptz(2017, 4, 17, 12, 0, 0), \
-      'start location 1', 'end location 1', 1,'bus1', 30);";
+      'start location 1', 'end location 1', 5,'bus1', 30);";
     return db.query(insertShift);
   });
 
@@ -28,7 +28,7 @@ describe('shiftManager', function(){
         end_location, driver_id, bus_id, route) VALUES
         (make_timestamptz($1, $2, $3, 8, 0, 0),
         make_timestamptz($1, $2, $3, 10, 0, 0),
-        'EXAMPLE', 'end location 1', 1,'bus1', 30);`;
+        'EXAMPLE', 'end location 1', 5,'bus1', 30);`;
       return db.query(insertShift, [d.getFullYear(), d.getMonth() + 1, d.getDate()]);
     });
 
@@ -233,8 +233,8 @@ describe('shiftManager', function(){
     });
 
     it('should exclude a driver who is booked for a shift that starts during the time period.', function() {
-      var start = new Date(2017, 3, 1, 9, 0, 0, 0);
-      var end = new Date(2017, 3, 1, 12, 0, 0, 0);
+      var start = "2017-04-01T07:00:00.000Z";
+      var end = "2017-04-01T11:00:00.000Z";
       return shift.driversAvailable(start, end)
       .then(function(res) {
         assert.equal(3, res.rowCount);

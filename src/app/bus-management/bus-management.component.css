@@ -15,7 +15,9 @@ th {
   padding: 12px 16px;
 }
 
-
+.AddBusBtn {
+  margin: 10px;
+}
 
 [class*='col-'] {
   float: left;

@@ -23,8 +23,7 @@ io.on('connection', function(socket) {
 
   // Request all shifts that occured on a given @date
   socket.on('getShiftByDay', function(date) {
-    console.log(date);
-    shift.getShiftByDay(new Date(date))
+    shift.getShiftByDay(date)
     .then(function(res) {
       socket.emit('update shifts', res.rows);
     })
@@ -158,6 +157,17 @@ io.on('connection', function(socket) {
   // Send to all client
   socket.on('addShift', function(params) {
     shift.addShift(params.startTime, params.endTime, params.startLoc,
+      params.endLoc, params.driverID, params.busID, params.route)
+    .then(function(res) {
+      io.emit('update shifts', res.rows);
+    })
+    .catch(function(err) {
+      console.error(err);
+    })
+  });
+
+  socket.on('editShift', function(params) {
+    shift.editShift(params.id, params.startTime, params.endTime, params.startLoc,
       params.endLoc, params.driverID, params.busID, params.route)
     .then(function(res) {
       io.emit('update shifts', res.rows);
@@ -304,7 +314,7 @@ io.on('connection', function(socket) {
   socket.on('deleteRoute', function(routeID) {
     route.deleteRoute(routeID)
     .then(function(res) {
-      io.emit('delete route', res.rows[0].id);
+      io.emit('delete route', res.rows[0].number);
     })
     .catch(function(err) {
       console.error(err);

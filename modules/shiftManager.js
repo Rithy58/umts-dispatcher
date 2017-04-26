@@ -12,7 +12,10 @@ module.exports = {
     if(!date) {  // If no date is passed, return todays info
       date = new Date();
     }
-    query = "SELECT * FROM shift WHERE date_trunc('day', start_time) = make_timestamptz($1,$2,$3,0,0,0)";
+    else if (typeof date === 'string') {
+      date = new Date(date);
+    }
+    query = "SELECT s.id,s.start_time,s.end_time,s.start_location,s.end_location,s.driver_id,d.name as driver_name,s.bus_id,s.route FROM shift as s LEFT JOIN driver as d ON d.id = s.driver_id WHERE date_trunc('day', start_time) = make_timestamptz($1,$2,$3,0,0,0) ORDER BY s.start_time";
     args = [date.getFullYear(), date.getMonth() + 1, date.getDate()];
     return db.query(query, args);
   },
@@ -65,6 +68,18 @@ module.exports = {
   addShift: function(startTime, endTime, startLoc, endLoc, driverID, busID, route) {
     query = "INSERT INTO shift (start_time, end_time, start_location, end_location, driver_id, bus_id, route) VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *";
     var args = [startTime,
+    endTime,
+    startLoc,
+    endLoc,
+    driverID,
+    busID,
+    route];
+    return db.query(query, args);
+  },
+  editShift: function(shiftID, startTime, endTime, startLoc, endLoc, driverID, busID, route) {
+    query = "UPDATE shift as s SET start_time=$2, end_time=$3, start_location=$4, end_location=$5, driver_id=$6, bus_id=$7, route=$8 FROM driver as d WHERE s.id=$1 AND d.id=$6 RETURNING s.id,s.start_time,s.end_time,s.start_location,s.end_location,s.driver_id,d.name as driver_name,s.bus_id,s.route";
+    var args = [shiftID,
+    startTime,
     endTime,
     startLoc,
     endLoc,

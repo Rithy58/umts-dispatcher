@@ -7,10 +7,9 @@ export class Route {
       this.validBusTypes = validBusTypes;
       }
 
-  updateData(validBusTypes: string) {
+  updateData(routeID: number, validBusTypes: string) {
+      this.routeID = routeID;
       this.validBusTypes = validBusTypes;
   }
-  
-
 
 }

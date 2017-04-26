@@ -6,15 +6,18 @@ import * as io from 'socket.io-client';
 
 @Injectable()
 export class BusService {
-  private url = "http://localhost:8080";
   private socket;
 
   connect() {
-    this.socket = io(this.url);
+    this.socket = io();
   }
 
   getTheBuses() {
     this.socket.emit('getAllBuses');
+  }
+
+  removeBus(id: string) {
+    this.socket.emit('removeBus', id);
   }
 
   // This will always load the buses that have been requested.

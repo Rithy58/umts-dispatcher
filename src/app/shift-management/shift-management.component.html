@@ -1,5 +1,9 @@
-<h2>Shift Management - {{date | date: 'longDate'}}</h2>
-<button md-raised-button (click)="openDialog()">Create New</button>
+<div layout="row" flex>
+    <h2>Shift Management - </h2>
+    <md-input-container flex>
+      <input type='date' (change)="changeDate(newDate.value)" mdInput placeholder="" #newDate>
+    </md-input-container>
+</div>
 <md-tab-group>
   <md-tab label="Route 30">
     <div class="container">
@@ -17,21 +21,105 @@
         </thead>
         <ng-container *ngFor="let shift of shifts">
           <tr *ngIf="shift.route == 30">
-            <td>{{shift.startTime | date: 'shortTime'}}</td>
-            <td>{{shift.endTime | date: 'shortTime'}}</td>
+            <td>{{shift.startTime}}</td>
+            <td>{{shift.endTime}}</td>
             <td>{{shift.startLocation}}</td>
             <td>{{shift.endLocation}}</td>
-            <td>{{shift.driverID}}</td>
+            <td>{{shift.driverName}}</td>
             <td>{{shift.busID}}</td>
-            <td><button md-button><md-icon md-list-icon>mode_edit</md-icon></button></td>
+            <td><button md-button (click)="openEditDialog(shift)"><md-icon md-list-icon>mode_edit</md-icon></button></td>
 
           </tr>
         </ng-container>
       </table>
     </div>
   </md-tab>
-  <md-tab label="Two">
-    <h1>Some more tab content</h1>
-    <p>...</p>
+  <md-tab label="Route 31">
+    <div class="container">
+      <table>
+        <thead>
+          <tr>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Start Location</th>
+            <th>End Location</th>
+            <th>Driver</th>
+            <th>Bus</th>
+            <th></th>
+          </tr>
+        </thead>
+        <ng-container *ngFor="let shift of shifts">
+          <tr *ngIf="shift.route == 31">
+            <td>{{shift.startTime}}</td>
+            <td>{{shift.endTime}}</td>
+            <td>{{shift.startLocation}}</td>
+            <td>{{shift.endLocation}}</td>
+            <td>{{shift.driverName}}</td>
+            <td>{{shift.busID}}</td>
+            <td><button md-button (click)="openEditDialog(shift)"><md-icon md-list-icon>mode_edit</md-icon></button></td>
+
+          </tr>
+        </ng-container>
+      </table>
+    </div>
+  </md-tab>
+  <md-tab label="Route 34">
+    <div class="container">
+      <table>
+        <thead>
+          <tr>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Start Location</th>
+            <th>End Location</th>
+            <th>Driver</th>
+            <th>Bus</th>
+            <th></th>
+          </tr>
+        </thead>
+        <ng-container *ngFor="let shift of shifts">
+          <tr *ngIf="shift.route == 34">
+            <td>{{shift.startTime}}</td>
+            <td>{{shift.endTime}}</td>
+            <td>{{shift.startLocation}}</td>
+            <td>{{shift.endLocation}}</td>
+            <td>{{shift.driverName}}</td>
+            <td>{{shift.busID}}</td>
+            <td><button md-button (click)="openEditDialog(shift)"><md-icon md-list-icon>mode_edit</md-icon></button></td>
+
+          </tr>
+        </ng-container>
+      </table>
+    </div>
+  </md-tab>
+  <md-tab label="Route 35">
+    <div class="container">
+      <table>
+        <thead>
+          <tr>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Start Location</th>
+            <th>End Location</th>
+            <th>Driver</th>
+            <th>Bus</th>
+            <th></th>
+          </tr>
+        </thead>
+        <ng-container *ngFor="let shift of shifts">
+          <tr *ngIf="shift.route == 35">
+            <td>{{shift.startTime}}</td>
+            <td>{{shift.endTime}}</td>
+            <td>{{shift.startLocation}}</td>
+            <td>{{shift.endLocation}}</td>
+            <td>{{shift.driverName}}</td>
+            <td>{{shift.busID}}</td>
+            <td><button md-button (click)="openEditDialog(shift)"><md-icon md-list-icon>mode_edit</md-icon></button></td>
+
+          </tr>
+        </ng-container>
+      </table>
+    </div>
   </md-tab>
 </md-tab-group>
+<button md-raised-button (click)="openCreateNewDialog()" color="primary">Create New</button>

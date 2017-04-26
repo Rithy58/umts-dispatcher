@@ -1,3 +1,32 @@
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.container {
+  padding: 20px 2px;
+}
+table {
+  min-width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  box-shadow: 0 2px 2px rgba(0,0,0,.24), 0 0 2px rgba(0,0,0,.12);
+}
+td {
+  text-align: center;
+  padding: 4px;
+  border: 1px solid rgba(0,0,0,.03);
+}
+th {
+  background: #f5f5f5;
+  padding: 12px 16px;
+}
+
+
+.AddRouteBtn {
+  margin: 10px;
+}
+
 [class*='col-'] {
   float: left;
   padding-right: 20px;

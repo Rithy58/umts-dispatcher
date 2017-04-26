@@ -14,21 +14,18 @@ export class BusManagementComponent implements OnInit {
   // Clients local Bus[] array for displaying
   buses: Bus[] = [];
 
-
   // Listener for all buses
   getBusConnection;
 
-
-
   constructor(private BusService: BusService, public dialog: MdDialog) { }
-
-
 
   addBus(id: string, type: string): void{
     this.BusService.addBus(id, type);
   }
 
-
+  removeBus(id: string): void {
+    this.BusService.removeBus(id);
+  }
 
   ngOnInit(): void {
     this.BusService.connect();
@@ -63,7 +60,18 @@ export class BusManagementComponent implements OnInit {
     dialogRef.afterClosed().subscribe(res=>{
       this.addBus(res[0],res[1]);
     });
+  }
 
+  deleteDialog(id: string){
+
+    let dialogRef = this.dialog.open(DeleteBusDialog);
+    dialogRef.afterClosed().subscribe(res => {
+      if(res == 'yes') {
+        this.removeBus(id);
+        this.buses = [];
+        this.ngOnInit();
+       }
+   });
   }
 }
 
@@ -73,4 +81,20 @@ export class BusManagementComponent implements OnInit {
 })
 export class AddBusDialog{
   constructor(public dialogRef: MdDialogRef<AddBusDialog>){}
+
+  selectedType: string;
+
+  types = [
+    {viewValue: 'Single'},
+    {viewValue: 'Double'}
+  ];
+}
+
+@Component({
+  selector: 'bus-management-delete-bus-dialog',
+  templateUrl: './bus-management-delete-bus-dialog.component.html',
+//  styleUrls: [ './bus-management-delete-bus-dialog.component.css' ]
+})
+export class DeleteBusDialog {
+  constructor(public dialogRef: MdDialogRef<DeleteBusDialog>) {}
 }

@@ -1,4 +1,8 @@
 var pg = require('pg');
+var types = pg.types;
+types.setTypeParser(1114, function(stringValue) {
+return stringValue;
+});
 
 var config = {
   max: 10, // max number of clients in the pool
