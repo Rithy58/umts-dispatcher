@@ -9,7 +9,7 @@
         </tr>
         <tr>
           <td>
-            <md-select placeholder="Select Bus Type" [(ngModel)]="selectedType" name="busType">
+            <md-select placeholder="Bus Type" [(ngModel)]="selectedType" name="busType">
               <md-option *ngFor="let type of types" [value]="type.viewValue">
                 {{ type.viewValue }}
               </md-option>

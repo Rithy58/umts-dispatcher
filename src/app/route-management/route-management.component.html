@@ -1,9 +1,11 @@
 <h2>Route</h2>
+<button md-raised-button (click)="openDialog()" color="primary">Add New Route</button>
 <table>
   <thead>
     <tr>
       <th>Route Number</th>
       <th>Valid Bus Types</th>
+      <th></th>
       <th></th>
     </tr>
   </thead>
@@ -11,7 +13,6 @@
     <td>{{route.routeID}}</td>
     <td>{{route.validBusTypes}}</td>
     <td><button md-button><md-icon md-list-icon>mode_edit</md-icon></button></td>
-    <td><button md-button (click)="deleteDialog(route.number)"><md-icon md-list-icon>delete</md-icon></button></td>
+    <td><button md-button (click)="deleteDialog(route.routeID)"><md-icon md-list-icon>delete</md-icon></button></td>
   </tr>
 </table>
-<button md-raised-button (click)="openDialog()" color="primary">Add New Route</button>

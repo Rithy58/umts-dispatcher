@@ -314,7 +314,7 @@ io.on('connection', function(socket) {
   socket.on('deleteRoute', function(routeID) {
     route.deleteRoute(routeID)
     .then(function(res) {
-      io.emit('delete route', res.rows[0].id);
+      io.emit('delete route', res.rows[0].number);
     })
     .catch(function(err) {
       console.error(err);
