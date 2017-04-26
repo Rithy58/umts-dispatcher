@@ -92,7 +92,8 @@ export class AddRouteDialog{
 
   types = [
     {viewValue: 'Single'},
-    {viewValue: 'Double'}
+    {viewValue: 'Double'},
+    {viewValue: 'Both'}
   ];
 }
 
