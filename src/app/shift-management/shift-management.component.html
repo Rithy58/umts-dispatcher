@@ -21,13 +21,13 @@
         </thead>
         <ng-container *ngFor="let shift of shifts">
           <tr *ngIf="shift.route == 30">
-            <td>{{shift.startTime | date: 'shortTime'}}</td>
-            <td>{{shift.endTime | date: 'shortTime'}}</td>
+            <td>{{shift.startTime}}</td>
+            <td>{{shift.endTime}}</td>
             <td>{{shift.startLocation}}</td>
             <td>{{shift.endLocation}}</td>
-            <td>{{shift.driverID}}</td>
+            <td>{{shift.driverName}}</td>
             <td>{{shift.busID}}</td>
-            <td><button md-button><md-icon md-list-icon>mode_edit</md-icon></button></td>
+            <td><button md-button (click)="openEditDialog(shift)"><md-icon md-list-icon>mode_edit</md-icon></button></td>
 
           </tr>
         </ng-container>
@@ -39,4 +39,4 @@
     <p>...</p>
   </md-tab>
 </md-tab-group>
-<button md-raised-button (click)="openDialog()" color="primary">Create New</button>
+<button md-raised-button (click)="openCreateNewDialog()" color="primary">Create New</button>

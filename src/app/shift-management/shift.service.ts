@@ -13,6 +13,9 @@ export class ShiftService {
   }
 
   addShift(startTime, endTime, startLoc, endLoc, route, driverID, busID): void {
+    if (!driverID) {
+      driverID = -1;
+    }
     this.socket.emit('addShift', {
       startTime: startTime,
       endTime: endTime,
@@ -21,6 +24,19 @@ export class ShiftService {
       route: route,
       driverID: driverID,
       busID: busID
+    });
+  }
+
+  editShift(shift: Shift) {
+    this.socket.emit('editShift', {
+      id: shift.id,
+      startTime: shift.startDate + "T" + shift.startTime + ":00.000Z",
+      endTime: shift.endDate + "T" + shift.endTime + ":00.000Z",
+      startLoc: shift.startLocation,
+      endLoc: shift.endLocation,
+      route: shift.route,
+      driverID: shift.driverID,
+      busID: shift.busID
     });
   }
 

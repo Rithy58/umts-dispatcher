@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 import {MdDialog, MdDialogRef} from '@angular/material';
 
@@ -67,14 +67,20 @@ export class DriverManagementComponent implements OnInit {
   }
 
   deleteDialog(id: number){
+    
     let dialogRef = this.dialog.open(DeleteDriverDialog);
     dialogRef.afterClosed().subscribe(res => {
       if(res == 'yes') {
         this.deleteDriver(id);
+        this.drivers = [];
+        this.ngOnInit();
+
        }
    });
   }
 }
+
+
 
 @Component({
   selector: 'driver-management-add-driver-dialog',
@@ -88,7 +94,6 @@ export class AddDriverDialog {
 @Component({
   selector: 'driver-management-delete-driver-dialog',
   templateUrl: './driver-management-delete-driver-dialog.component.html',
-  styleUrls: [ './driver-management-delete-driver-dialog.component.css' ]
 })
 export class DeleteDriverDialog {
   constructor(public dialogRef: MdDialogRef<DeleteDriverDialog>) {}

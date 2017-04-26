@@ -8,9 +8,8 @@ export class Route {
       }
 
   updateData(validBusTypes: string) {
+
       this.validBusTypes = validBusTypes;
   }
-  
-
 
 }

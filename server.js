@@ -166,6 +166,17 @@ io.on('connection', function(socket) {
     })
   });
 
+  socket.on('editShift', function(params) {
+    shift.editShift(params.id, params.startTime, params.endTime, params.startLoc,
+      params.endLoc, params.driverID, params.busID, params.route)
+    .then(function(res) {
+      io.emit('update shifts', res.rows);
+    })
+    .catch(function(err) {
+      console.error(err);
+    })
+  });
+
   // User gets list of available drivers
   // Send to specific client
   socket.on('driversAvailable', function(params) {

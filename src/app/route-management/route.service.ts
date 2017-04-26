@@ -19,6 +19,9 @@ export class RouteService {
     });
   }
 
+  deleteRoute(number: number) {
+    this.socket.emit('deleteRoute', number);
+  }
 
   getAllRoutes(){
     this.socket.emit('getAllRoutes');

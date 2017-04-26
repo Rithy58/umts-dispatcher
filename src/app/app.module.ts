@@ -7,7 +7,8 @@ import { MaterialModule } from '@angular/material';
 import { AppComponent }         from './app.component';
 import { SidenavComponent }       from './sidenav/sidenav.component';
 import { ShiftManagementComponent }   from './shift-management/shift-management.component';
-import { ShiftManagementCreateNewDialog }   from './shift-management/shift-management.component';
+import { CreateShiftDialog }   from './shift-management/create-shift-dialog.component';
+import { EditShiftDialog }   from './shift-management/edit-shift-dialog.component';
 import { BusManagementComponent } from './bus-management/bus-management.component';
 import { RouteManagementComponent }   from './route-management/route-management.component';
 import { DriverManagementComponent }   from './driver-management/driver-management.component';
@@ -17,6 +18,10 @@ import { RouteService }          from './route-management/route.service';
 import { DriverService }          from './driver-management/driver.service';
 import { AddDriverDialog }          from './driver-management/driver-management.component';
 import { AddBusDialog }         from './bus-management/bus-management.component';
+import { AddRouteDialog }      from './route-management/route-management.component';
+import { DeleteDriverDialog }         from './driver-management/driver-management.component';
+import { DeleteBusDialog }     from './bus-management/bus-management.component';
+import { DeleteRouteDialog }     from './route-management/route-management.component';
 
 import { AppRoutingModule }     from './app-routing.module';
 
@@ -32,15 +37,29 @@ import { AppRoutingModule }     from './app-routing.module';
     AppComponent,
     SidenavComponent,
     ShiftManagementComponent,
-    ShiftManagementCreateNewDialog,
+    CreateShiftDialog,
+    EditShiftDialog,
     BusManagementComponent,
     DriverManagementComponent,
     RouteManagementComponent,
     AddDriverDialog,
-    AddBusDialog
+    AddBusDialog,
+    AddRouteDialog,
+    DeleteDriverDialog,
+    DeleteBusDialog,
+    DeleteRouteDialog
   ],
 
-  entryComponents: [ShiftManagementCreateNewDialog, AddDriverDialog,AddBusDialog],
+  entryComponents: [
+    CreateShiftDialog,
+    EditShiftDialog,
+    AddDriverDialog,
+    AddBusDialog,
+    AddRouteDialog,
+    DeleteDriverDialog,
+    DeleteBusDialog,
+    DeleteRouteDialog
+  ],
   providers: [ ShiftService, BusService, RouteService, DriverService ],
   bootstrap: [ AppComponent ]
 })
