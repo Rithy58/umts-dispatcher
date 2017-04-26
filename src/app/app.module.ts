@@ -18,8 +18,10 @@ import { RouteService }          from './route-management/route.service';
 import { DriverService }          from './driver-management/driver.service';
 import { AddDriverDialog }          from './driver-management/driver-management.component';
 import { AddBusDialog }         from './bus-management/bus-management.component';
+import { AddRouteDialog }      from './route-management/route-management.component';
 import { DeleteDriverDialog }         from './driver-management/driver-management.component';
 import { DeleteBusDialog }     from './bus-management/bus-management.component';
+import { DeleteRouteDialog }     from './route-management/route-management.component';
 
 import { AppRoutingModule }     from './app-routing.module';
 
@@ -42,8 +44,10 @@ import { AppRoutingModule }     from './app-routing.module';
     RouteManagementComponent,
     AddDriverDialog,
     AddBusDialog,
+    AddRouteDialog,
     DeleteDriverDialog,
-    DeleteBusDialog
+    DeleteBusDialog,
+    DeleteRouteDialog
   ],
 
   entryComponents: [
@@ -51,8 +55,10 @@ import { AppRoutingModule }     from './app-routing.module';
     EditShiftDialog,
     AddDriverDialog,
     AddBusDialog,
+    AddRouteDialog,
     DeleteDriverDialog,
-    DeleteBusDialog
+    DeleteBusDialog,
+    DeleteRouteDialog
   ],
   providers: [ ShiftService, BusService, RouteService, DriverService ],
   bootstrap: [ AppComponent ]
