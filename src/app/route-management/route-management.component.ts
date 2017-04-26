@@ -45,7 +45,7 @@ export class RouteManagementComponent implements OnInit {
           this.routes.forEach(function(s) {
             if (s.routeID === route.number) {
               inRouteArr = true;
-              s.updateData(route.valid_bus_types);
+              s.updateData(route.number, route.valid_bus_types);
             }
           });
           // Insert if we didnt find it.
@@ -75,7 +75,6 @@ export class RouteManagementComponent implements OnInit {
         this.deleteRoute(number);
         this.routes = [];
         this.ngOnInit();
-
        }
    });
   }
@@ -92,7 +91,8 @@ export class AddRouteDialog{
 
   types = [
     {viewValue: 'Single'},
-    {viewValue: 'Double'}
+    {viewValue: 'Double'},
+    {viewValue: 'Both'}
   ];
 }
 
