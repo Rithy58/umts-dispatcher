@@ -1,0 +1,24 @@
+<h1 md-dialog-title>Bus</h1>
+<div md-dialog-content>
+  <form class="new-route-form">
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td><md-input-container>
+            <input mdInput placeholder="Route Number" #routeNumber>
+          </md-input-container></td>
+        </tr>
+        <tr>
+          <td>
+            <md-select placeholder="Select Bus Type" [(ngModel)]="selectedType" name="busType">
+              <md-option *ngFor="let type of types" [value]="type.viewValue">
+                {{ type.viewValue }}
+              </md-option>
+            </md-select>
+        </td>
+        </tr>
+      </table>
+  </form>
+</div>
+<div md-dialog-actions>
+  <button md-button (click)="dialogRef.close([routeNumber.value,this.selectedType])">Save</button>
+</div>
