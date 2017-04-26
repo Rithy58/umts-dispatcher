@@ -34,9 +34,92 @@
       </table>
     </div>
   </md-tab>
-  <md-tab label="Two">
-    <h1>Some more tab content</h1>
-    <p>...</p>
+  <md-tab label="Route 31">
+    <div class="container">
+      <table>
+        <thead>
+          <tr>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Start Location</th>
+            <th>End Location</th>
+            <th>Driver</th>
+            <th>Bus</th>
+            <th></th>
+          </tr>
+        </thead>
+        <ng-container *ngFor="let shift of shifts">
+          <tr *ngIf="shift.route == 31">
+            <td>{{shift.startTime}}</td>
+            <td>{{shift.endTime}}</td>
+            <td>{{shift.startLocation}}</td>
+            <td>{{shift.endLocation}}</td>
+            <td>{{shift.driverName}}</td>
+            <td>{{shift.busID}}</td>
+            <td><button md-button (click)="openEditDialog(shift)"><md-icon md-list-icon>mode_edit</md-icon></button></td>
+
+          </tr>
+        </ng-container>
+      </table>
+    </div>
+  </md-tab>
+  <md-tab label="Route 34">
+    <div class="container">
+      <table>
+        <thead>
+          <tr>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Start Location</th>
+            <th>End Location</th>
+            <th>Driver</th>
+            <th>Bus</th>
+            <th></th>
+          </tr>
+        </thead>
+        <ng-container *ngFor="let shift of shifts">
+          <tr *ngIf="shift.route == 34">
+            <td>{{shift.startTime}}</td>
+            <td>{{shift.endTime}}</td>
+            <td>{{shift.startLocation}}</td>
+            <td>{{shift.endLocation}}</td>
+            <td>{{shift.driverName}}</td>
+            <td>{{shift.busID}}</td>
+            <td><button md-button (click)="openEditDialog(shift)"><md-icon md-list-icon>mode_edit</md-icon></button></td>
+
+          </tr>
+        </ng-container>
+      </table>
+    </div>
+  </md-tab>
+  <md-tab label="Route 35">
+    <div class="container">
+      <table>
+        <thead>
+          <tr>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Start Location</th>
+            <th>End Location</th>
+            <th>Driver</th>
+            <th>Bus</th>
+            <th></th>
+          </tr>
+        </thead>
+        <ng-container *ngFor="let shift of shifts">
+          <tr *ngIf="shift.route == 35">
+            <td>{{shift.startTime}}</td>
+            <td>{{shift.endTime}}</td>
+            <td>{{shift.startLocation}}</td>
+            <td>{{shift.endLocation}}</td>
+            <td>{{shift.driverName}}</td>
+            <td>{{shift.busID}}</td>
+            <td><button md-button (click)="openEditDialog(shift)"><md-icon md-list-icon>mode_edit</md-icon></button></td>
+
+          </tr>
+        </ng-container>
+      </table>
+    </div>
   </md-tab>
 </md-tab-group>
 <button md-raised-button (click)="openCreateNewDialog()" color="primary">Create New</button>
