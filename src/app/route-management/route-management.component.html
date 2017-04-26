@@ -1,26 +1,16 @@
-<div>
-  <label>Route Number:</label> <input #routeNumber />
-  <label>Valid Bus Types (single, double, or both):</label> <input #validBusTypes />
-  <button (click)="add(routeNumber.value, validBusTypes.value); routeNumber.value=''; validBusTypes.value=''">
-    Add
-  </button>
-</div>
-<div class="grid grid-pad">
-  <a *ngFor="let route of routes"  class="col-1-4">
-  <md-card class=“example-card”>
-  <md-card-header>
-    <md-card-title>Route {{route.routeID}}</md-card-title>
-    <md-card-subtitle>Valid Bus Type: {{route.validBusTypes}}</md-card-subtitle>
-  </md-card-header>
-  <md-card-content>
-    <p>
-    
-    </p>
-  </md-card-content>
-  <md-card-actions>
-    <button md-button>EDIT</button>
-    <button md-button>DELETE</button>
-  </md-card-actions>
-</md-card>
-  </a>
-</div>
+<button md-raised-button (click)="openDialog()" class='AddRouteBtn'>Add New Route</button>
+
+<table>
+  <thead>
+    <tr>
+      <th>Route Number</th>
+      <th>Valid Bus Types</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tr *ngFor="let route of routes">
+    <td>{{route.routeID}}</td>
+    <td>{{route.validBusTypes}}</td>
+    <td><button md-button><md-icon md-list-icon>mode_edit</md-icon></button></td>
+  </tr>
+</table>
