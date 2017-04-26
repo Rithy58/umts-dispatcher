@@ -22,7 +22,7 @@ module.exports = {
   },
 
   deleteRoute: function(routeNumber){
-    return db.query("DELETE FROM route WHERE number=$1 RETURNING $1 as number", [routeNumber]);
+    return db.query("DELETE FROM route WHERE number=$1 RETURNING $1 AS number", [routeNumber]);
   },
 
   getAllDetours: function(){
