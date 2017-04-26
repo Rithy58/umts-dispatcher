@@ -32,7 +32,7 @@
           </md-input-container></td>
         </tr>
         <tr>
-          <td><md-select placeholder="Driver" [(ngModel)]="shift.driver[0]" (change)="updateDriverName(shift.driver[0])" name="driver">
+          <td><md-select [(ngModel)]="shift.driverID" (change)="updateDriver(shift.driverID)" placeholder="Driver" name="driver">
             <md-option *ngFor="let driver of drivers" [value]="driver.id">
               {{driver.name}}
             </md-option>

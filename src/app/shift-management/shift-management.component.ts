@@ -36,6 +36,7 @@ export class ShiftManagementComponent implements OnInit {
       let startD = startDate + "T" + startTime + ":00Z";
       let endD = endDate + "T" + endTime + ":00Z";
       this.ShiftService.addShift(startD, endD, startLoc, endLoc, route, driverID, busID);
+      this.ShiftService.getShiftByDay(this.date);
   }
 
   ngOnInit(): void {
@@ -89,6 +90,7 @@ export class ShiftManagementComponent implements OnInit {
       data: shift
     });
     dialogRef.afterClosed().subscribe(res => {
+      console.log(shift);
       this.ShiftService.editShift(shift);
     });
   }
