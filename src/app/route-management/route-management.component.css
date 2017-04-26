@@ -1,3 +1,11 @@
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.container {
+  padding: 20px 2px;
+}
 table {
   min-width: 100%;
   border-collapse: collapse;

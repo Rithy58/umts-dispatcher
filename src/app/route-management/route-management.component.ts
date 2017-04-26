@@ -24,9 +24,12 @@ export class RouteManagementComponent implements OnInit {
 
 
 
-  addRoute(routeID: number, validBusTypes: string): void {
-
+  add(routeID: number, validBusTypes: string): void {
     this.RouteService.addRoute(routeID, validBusTypes);
+  }
+
+  deleteRoute(number: number): void {
+    this.RouteService.deleteRoute(number);
   }
 
   ngOnInit(): void {
@@ -60,9 +63,21 @@ export class RouteManagementComponent implements OnInit {
   openDialog() {
     let dialogRef = this.dialog.open(AddRouteDialog);
     dialogRef.afterClosed().subscribe(res=>{
-      this.addRoute(res[0],res[1]);
+      this.add(res[0],res[1]);
     });
+  }
 
+  deleteDialog(number: number){
+
+    let dialogRef = this.dialog.open(DeleteRouteDialog);
+    dialogRef.afterClosed().subscribe(res => {
+      if(res == 'yes') {
+        this.deleteRoute(number);
+        this.routes = [];
+        this.ngOnInit();
+
+       }
+   });
   }
 }
 
@@ -79,4 +94,12 @@ export class AddRouteDialog{
     {viewValue: 'Single'},
     {viewValue: 'Double'}
   ];
+}
+
+@Component({
+  selector: 'delete-route-popup',
+  templateUrl: './delete-route-popup.html',
+})
+export class DeleteRouteDialog {
+  constructor(public dialogRef: MdDialogRef<DeleteRouteDialog>) {}
 }
