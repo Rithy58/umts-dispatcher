@@ -7,7 +7,8 @@ import { MaterialModule } from '@angular/material';
 import { AppComponent }         from './app.component';
 import { SidenavComponent }       from './sidenav/sidenav.component';
 import { ShiftManagementComponent }   from './shift-management/shift-management.component';
-import { ShiftManagementCreateNewDialog }   from './shift-management/shift-management.component';
+import { CreateShiftDialog }   from './shift-management/create-shift-dialog.component';
+import { EditShiftDialog }   from './shift-management/edit-shift-dialog.component';
 import { BusManagementComponent } from './bus-management/bus-management.component';
 import { RouteManagementComponent }   from './route-management/route-management.component';
 import { DriverManagementComponent }   from './driver-management/driver-management.component';
@@ -32,7 +33,8 @@ import { AppRoutingModule }     from './app-routing.module';
     AppComponent,
     SidenavComponent,
     ShiftManagementComponent,
-    ShiftManagementCreateNewDialog,
+    CreateShiftDialog,
+    EditShiftDialog,
     BusManagementComponent,
     DriverManagementComponent,
     RouteManagementComponent,
@@ -40,7 +42,12 @@ import { AppRoutingModule }     from './app-routing.module';
     AddBusDialog
   ],
 
-  entryComponents: [ShiftManagementCreateNewDialog, AddDriverDialog,AddBusDialog],
+  entryComponents: [
+    CreateShiftDialog,
+    EditShiftDialog,
+    AddDriverDialog,
+    AddBusDialog
+  ],
   providers: [ ShiftService, BusService, RouteService, DriverService ],
   bootstrap: [ AppComponent ]
 })

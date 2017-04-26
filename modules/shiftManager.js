@@ -15,7 +15,7 @@ module.exports = {
     else if (typeof date === 'string') {
       date = new Date(date);
     }
-    query = "SELECT * FROM shift WHERE date_trunc('day', start_time) = make_timestamptz($1,$2,$3,0,0,0)";
+    query = "SELECT s.id,s.start_time,s.end_time,s.start_location,s.end_location,s.driver_id,d.name as driver_name,s.bus_id,s.route FROM shift as s, driver as d WHERE date_trunc('day', start_time) = make_timestamptz($1,$2,$3,0,0,0) AND d.id = s.driver_id ORDER BY s.start_time";
     args = [date.getFullYear(), date.getMonth() + 1, date.getDate()];
     return db.query(query, args);
   },
