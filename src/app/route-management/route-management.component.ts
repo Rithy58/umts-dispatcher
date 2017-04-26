@@ -28,8 +28,8 @@ export class RouteManagementComponent implements OnInit {
     this.RouteService.addRoute(routeID, validBusTypes);
   }
 
-  deleteRoute(number: number): void {
-    this.RouteService.deleteRoute(number);
+  deleteRoute(routeID: number): void {
+    this.RouteService.deleteRoute(routeID);
   }
 
   ngOnInit(): void {
@@ -45,7 +45,7 @@ export class RouteManagementComponent implements OnInit {
           this.routes.forEach(function(s) {
             if (s.routeID === route.number) {
               inRouteArr = true;
-              s.updateData(route.valid_bus_types);
+              s.updateData(route.number, route.valid_bus_types);
             }
           });
           // Insert if we didnt find it.
@@ -67,15 +67,14 @@ export class RouteManagementComponent implements OnInit {
     });
   }
 
-  deleteDialog(number: number){
+  deleteDialog(routeID: number){
 
     let dialogRef = this.dialog.open(DeleteRouteDialog);
     dialogRef.afterClosed().subscribe(res => {
       if(res == 'yes') {
-        this.deleteRoute(number);
+        this.deleteRoute(routeID);
         this.routes = [];
         this.ngOnInit();
-
        }
    });
   }
@@ -92,7 +91,8 @@ export class AddRouteDialog{
 
   types = [
     {viewValue: 'Single'},
-    {viewValue: 'Double'}
+    {viewValue: 'Double'},
+    {viewValue: 'Both'}
   ];
 }
 
